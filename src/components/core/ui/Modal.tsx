@@ -1,6 +1,6 @@
 import * as React from "react";
 import classNames from "classnames";
-import { HotKey } from "./";
+import { HotKey } from "..";
 
 export interface IModalProps {
   isOpen: boolean;
@@ -17,6 +17,10 @@ export class Modal extends React.Component<IModalProps, any> {
       escapeClose = true,
       backgroundClickClose = true
     } = this.props;
+
+    if (!isOpen) {
+      return null;
+    }
 
     return (
       <React.Fragment>

@@ -4,7 +4,7 @@ import { ApolloProvider } from "react-apollo";
 
 import { client } from "./graphql/client";
 
-import Dashboard from "./pages/Dashboard";
+import DashboardPage from "./pages/DashboardPage";
 
 class App extends Component<any, any> {
   render() {
@@ -12,7 +12,7 @@ class App extends Component<any, any> {
       <div className="animated fadeIn">
         <ApolloProvider client={client}>
           <Router>
-            <Route path="/" exact component={Dashboard} />
+            <Route path="/" exact component={DashboardPage} />
           </Router>
         </ApolloProvider>
       </div>

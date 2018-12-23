@@ -4,6 +4,7 @@ export const getSpells = gql`
     spells {
       _id
       name
+      level
     }
   }
 `;

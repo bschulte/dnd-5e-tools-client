@@ -1,9 +1,16 @@
 import * as React from "react";
-import { HotKey, Modal } from "../components/core";
+
+import { HotKey, Modal, PageContainer, GraphqlQuery } from "../components/core";
+import { Dashboard } from "../components/Dashboard/Dashboard";
+
+import { getSpells } from "../graphql/queries";
 
 export interface IDashboardProps {}
 
-export default class Dashboard extends React.Component<IDashboardProps, any> {
+export default class DashboardPage extends React.Component<
+  IDashboardProps,
+  any
+> {
   state = {
     showModal: false
   };
@@ -16,11 +23,12 @@ export default class Dashboard extends React.Component<IDashboardProps, any> {
   public render() {
     const { showModal } = this.state;
     return (
-      <div>
+      <PageContainer>
         <HotKey hotkey="s" shift onTrigger={this.toggleModal} />
         <Modal isOpen={showModal} toggle={this.toggleModal} />
-        App is here! Dashboard
-      </div>
+
+        <GraphqlQuery query={getSpells} component={Dashboard} />
+      </PageContainer>
     );
   }
 }
