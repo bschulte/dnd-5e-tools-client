@@ -4,12 +4,15 @@ export interface IHotKeyProps {
   shift?: boolean;
   hotkey: string;
   onTrigger: () => void;
+  debug?: boolean;
 }
 
-export default class HotKey extends React.Component<IHotKeyProps, any> {
+export class HotKey extends React.Component<IHotKeyProps, any> {
   handleKeyPress = (e: KeyboardEvent) => {
-    const { shift, hotkey, onTrigger } = this.props;
-    console.log(e);
+    const { shift, hotkey, onTrigger, debug } = this.props;
+
+    debug && console.log(e);
+
     if (e.key.toUpperCase() === hotkey.toUpperCase()) {
       if (shift) {
         if (e.shiftKey) {

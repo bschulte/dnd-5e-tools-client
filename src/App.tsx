@@ -1,6 +1,5 @@
 import React, { Component } from "react";
-import HotKey from "./components/core/Hotkey";
-import Modal from "./components/core/Modal";
+import { HotKey, Modal } from "./components/core";
 
 interface IAppState {
   showModal: boolean;
@@ -21,7 +20,12 @@ class App extends Component<any, IAppState> {
     return (
       <div className="animated fadeIn">
         <HotKey hotkey="s" shift onTrigger={this.toggleModal} />
-        <Modal isOpen={showModal} toggle={this.toggleModal} />
+        <Modal
+          isOpen={showModal}
+          toggle={this.toggleModal}
+          backgroundClickClose={false}
+          escapeClose={false}
+        />
         App is here!
       </div>
     );
