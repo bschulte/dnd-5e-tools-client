@@ -1,25 +1,28 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from "react";
+import HotKey from "./components/core/Hotkey";
+import Modal from "./components/core/Modal";
 
-class App extends Component {
+interface IAppState {
+  showModal: boolean;
+}
+
+class App extends Component<any, IAppState> {
+  state = {
+    showModal: false
+  };
+
+  toggleModal = () => {
+    const { showModal } = this.state;
+    this.setState({ showModal: !showModal });
+  };
+
   render() {
+    const { showModal } = this.state;
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.tsx</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+      <div className="animated fadeIn">
+        <HotKey hotkey="s" shift onTrigger={this.toggleModal} />
+        <Modal isOpen={showModal} toggle={this.toggleModal} />
+        App is here!
       </div>
     );
   }
