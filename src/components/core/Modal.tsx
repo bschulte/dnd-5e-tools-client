@@ -12,14 +12,18 @@ export default class Modal extends React.Component<IModalProps, any> {
 
     return (
       <div
-        onClick={toggle}
         className={classNames(
           "fixed pin z-50 overflow-auto bg-smoke-light flex",
-          { visible: isOpen },
+          { "visible animated fadeIn": isOpen },
           { invisible: !isOpen }
         )}
       >
-        <div className="relative p-8 bg-white w-full max-w-md m-auto flex-col flex">
+        <div
+          className={classNames(
+            "relative align-top p-8 bg-white w-full max-w-md m-auto flex-col flex",
+            { "animated slideInUp": isOpen }
+          )}
+        >
           Centered modal!
         </div>
       </div>
