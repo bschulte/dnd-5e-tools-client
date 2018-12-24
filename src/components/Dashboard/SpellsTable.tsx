@@ -1,5 +1,5 @@
 import * as React from "react";
-import ReactTable from "react-table";
+import { Table } from "../core";
 
 interface ISpellsTableProps {
   spells: any[];
@@ -10,12 +10,14 @@ export class SpellsTable extends React.Component<ISpellsTableProps, any> {
     const { spells } = this.props;
 
     return (
-      <ReactTable
+      <Table
         data={spells}
         columns={[
-          { Header: "ID", accessor: "_id", filterable: true },
+          { Header: "Level", accessor: "level", width: 50 },
           { Header: "Name", accessor: "name", filterable: true }
         ]}
+        showPageSizeOptions={false}
+        showPageJump={false}
       />
     );
   }

@@ -1,3 +1,15 @@
+/**
+ * This injects Tailwind's base styles, which is a combination of
+ * Normalize.css and some additional base styles.
+ *
+ * You can see the styles here:
+ * https://github.com/tailwindcss/tailwindcss/blob/master/css/preflight.css
+ *
+ * If using `postcss-import`, use this import instead:
+ *
+ * @import "tailwindcss/preflight";
+ */
+
 /*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */
 
 /* Document
@@ -496,6 +508,14 @@ table {
   border-collapse: collapse;
 }
 
+/**
+  * This injects any component classes registered by plugins.
+  *
+  * If using `postcss-import`, use this import instead:
+  *
+  * @import "tailwindcss/components";
+  */
+
 .container {
   width: 100%;
 }
@@ -523,6 +543,31 @@ table {
     max-width: 1200px;
   }
 }
+
+/**
+  * Here you would add any of your custom component classes; stuff that you'd
+  * want loaded *before* the utilities so that the utilities could still
+  * override them.
+  *
+  * Example:
+  *
+  * .btn { ... }
+  * .form-input { ... }
+  *
+  * Or if using a preprocessor or `postcss-import`:
+  *
+  * @import "components/buttons";
+  * @import "components/forms";
+  */
+
+/**
+  * This injects all of Tailwind's utility classes, generated based on your
+  * config file.
+  *
+  * If using `postcss-import`, use this import instead:
+  *
+  * @import "tailwindcss/utilities";
+  */
 
 .list-reset {
   list-style: none;
@@ -3108,6 +3153,14 @@ table {
 
 .font-mono {
   font-family: Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace;
+}
+
+.font-roboto {
+  font-family: Roboto;
+}
+
+.font-roboto-condensed {
+  font-family: Roboto Condensed;
 }
 
 .font-hairline {
@@ -6397,6 +6450,21 @@ table {
   z-index: auto;
 }
 
+/**
+  * Here you would add any custom utilities you need that don't come out of the
+  * box with Tailwind.
+  *
+  * Example :
+  *
+  * .bg-pattern-graph-paper { ... }
+  * .skew-45 { ... }
+  *
+  * Or if using a preprocessor or `postcss-import`:
+  *
+  * @import "utilities/background-patterns";
+  * @import "utilities/skew-transforms";
+  */
+
 @media (min-width: 576px) {
   .sm\:list-reset {
     list-style: none;
@@ -8974,6 +9042,14 @@ table {
 
   .sm\:font-mono {
     font-family: Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace;
+  }
+
+  .sm\:font-roboto {
+    font-family: Roboto;
+  }
+
+  .sm\:font-roboto-condensed {
+    font-family: Roboto Condensed;
   }
 
   .sm\:font-hairline {
@@ -14827,6 +14903,14 @@ table {
     font-family: Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace;
   }
 
+  .md\:font-roboto {
+    font-family: Roboto;
+  }
+
+  .md\:font-roboto-condensed {
+    font-family: Roboto Condensed;
+  }
+
   .md\:font-hairline {
     font-weight: 100;
   }
@@ -20678,6 +20762,14 @@ table {
     font-family: Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace;
   }
 
+  .lg\:font-roboto {
+    font-family: Roboto;
+  }
+
+  .lg\:font-roboto-condensed {
+    font-family: Roboto Condensed;
+  }
+
   .lg\:font-hairline {
     font-weight: 100;
   }
@@ -26527,6 +26619,14 @@ table {
 
   .xl\:font-mono {
     font-family: Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace;
+  }
+
+  .xl\:font-roboto {
+    font-family: Roboto;
+  }
+
+  .xl\:font-roboto-condensed {
+    font-family: Roboto Condensed;
   }
 
   .xl\:font-hairline {
