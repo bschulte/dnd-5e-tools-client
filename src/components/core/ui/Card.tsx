@@ -7,6 +7,6 @@ export interface ICardProps {
 export class Card extends React.Component<ICardProps, any> {
   public render() {
     const { children } = this.props;
-    return <div className="shadow-md p-4 bg-black">{children}</div>;
+    return <div className="shadow-md bg-grey-darkest">{children}</div>;
   }
 }

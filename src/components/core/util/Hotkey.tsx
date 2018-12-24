@@ -16,11 +16,11 @@ export class HotKey extends React.Component<IHotKeyProps, any> {
     if (e.key.toUpperCase() === hotkey.toUpperCase()) {
       if (shift) {
         if (e.shiftKey) {
-          e.stopPropagation();
+          e.preventDefault();
           onTrigger();
         }
       } else {
-        e.stopPropagation();
+        e.preventDefault();
         onTrigger();
       }
     }

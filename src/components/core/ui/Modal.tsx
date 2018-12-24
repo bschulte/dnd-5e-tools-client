@@ -1,5 +1,7 @@
 import * as React from "react";
 import classNames from "classnames";
+import { Animated } from "react-animated-css";
+
 import { HotKey } from "..";
 
 export interface IModalProps {
@@ -39,9 +41,7 @@ export class Modal extends React.Component<IModalProps, any> {
         {/* Modal background */}
         <div
           className={classNames(
-            "animated faster fixed pin z-50 overflow-auto bg-smoke-light flex",
-            { "visible fadeIn": isOpen },
-            { fadeOut: !isOpen }
+            "animated fadeIn fixed pin z-50 overflow-auto bg-smoke flex"
           )}
           onClick={(e: React.MouseEvent) => {
             // Close the modal on background click if specified via props
