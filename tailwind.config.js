@@ -231,7 +231,9 @@ module.exports = {
       "Liberation Mono",
       "Courier New",
       "monospace"
-    ]
+    ],
+    roboto: ["Roboto"],
+    "roboto-condensed": ["Roboto Condensed"]
   },
 
   /*
