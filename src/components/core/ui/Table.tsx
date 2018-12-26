@@ -67,12 +67,14 @@ export class Table extends React.Component<
     return (
       <React.Fragment>
         {combinedFilter && (
-          <Input
-            value={searchStr}
-            onChange={(e: React.FormEvent<HTMLInputElement>) =>
-              this.setState({ searchStr: e.currentTarget.value })
-            }
-          />
+          <div className="flex justify-end mb-2">
+            <Input
+              value={searchStr}
+              onChange={(e: React.FormEvent<HTMLInputElement>) =>
+                this.setState({ searchStr: e.currentTarget.value })
+              }
+            />
+          </div>
         )}
         <ReactTable
           columns={columns.map(col => ({ ...col, style: { padding: "1rem" } }))}
