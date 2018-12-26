@@ -18,6 +18,7 @@ export class SpellsTable extends React.Component<ISpellsTableProps, any> {
           { Header: "Name", accessor: "name" }
         ]}
         combinedFilter
+        combinedFilterColumns={["name"]}
         getTdProps={(_: any, rowInfo: any, column: any) => {
           return {
             onClick: () => {

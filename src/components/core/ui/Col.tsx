@@ -22,7 +22,7 @@ export class Col extends React.Component<IColProps, any> {
     } = this.props;
     return (
       <div
-        className={classNames("px-2", {
+        className={classNames({
           "flex-1": auto,
           // Regular sizes
           "w-1/6": size === 1,

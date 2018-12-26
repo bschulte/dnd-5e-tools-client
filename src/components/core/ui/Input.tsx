@@ -1,9 +1,17 @@
 import * as React from "react";
+import classNames from "classnames";
 
-export interface IInputProps {}
-
-export class Input extends React.Component<IInputProps, any> {
+export class Input extends React.Component<
+  React.HTMLProps<HTMLInputElement>,
+  any
+> {
   public render() {
-    return <input className="bg-grey-darker text-grey-light p-3" />;
+    const { className } = this.props;
+    return (
+      <input
+        className={classNames("bg-grey-darker text-grey-light p-3", className)}
+        {...this.props}
+      />
+    );
   }
 }
