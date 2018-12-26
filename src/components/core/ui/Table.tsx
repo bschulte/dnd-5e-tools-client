@@ -8,12 +8,19 @@ function filterCaseInsensitive(filter: any, row: any) {
     : true;
 }
 
-export class Table extends React.Component<Partial<TableProps<any, any>>, any> {
+interface ITableProps {
+  combinedFilter?: boolean;
+}
+
+export class Table extends React.Component<
+  Partial<TableProps<any, any>> & ITableProps,
+  any
+> {
   public render() {
     const { columns, data, ...rest } = this.props;
     return (
       <ReactTable
-        columns={columns}
+        columns={columns.map(col => ({ ...col, style: { padding: "1rem" } }))}
         data={data}
         defaultFilterMethod={filterCaseInsensitive}
         {...rest}

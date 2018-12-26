@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import { Row, Col, Card, CardBody, CardHeader } from "../core";
+import { Row, Col, Card, CardBody, CardHeader, Input } from "../core";
 import { SpellsTable } from "./SpellsTable";
 
 export interface IDashboardProps {
@@ -21,7 +21,7 @@ export class Dashboard extends React.Component<IDashboardProps, any> {
           </Card>
         </Col>
         <Col sm={6} lg={3}>
-          Testing
+          <Input />
         </Col>
       </Row>
     );

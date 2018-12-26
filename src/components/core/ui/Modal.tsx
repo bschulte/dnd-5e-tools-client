@@ -1,6 +1,5 @@
 import * as React from "react";
 import classNames from "classnames";
-import { Animated } from "react-animated-css";
 
 import { HotKey } from "..";
 
