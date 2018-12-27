@@ -1,9 +1,9 @@
 import * as React from "react";
-import { Omnibar } from "@blueprintjs/select";
 
 import { Row, Col, Card, CardBody, CardHeader, HotKey } from "../core";
 import { SpellsTable } from "./SpellsTable";
 import MonstersTable from "./MonstersTable";
+import GlobalSearch from "./GlobalSearch";
 
 export interface IDashboardProps {
   data: any;
@@ -19,23 +19,6 @@ export class Dashboard extends React.Component<IDashboardProps, any> {
     this.setState({ showOmnibar: !showOmnibar });
   };
 
-  generateOmnibarItems = (data: any) => {
-    if (!("spells" in data) || !("monsters" in data)) {
-      return [];
-    }
-
-    const spells = data.spells.map((spell: any) => ({
-      name: spell.name,
-      type: "Spell"
-    }));
-    const monsters = data.monsters.map((monster: any) => ({
-      name: monster.name,
-      type: "Monster"
-    }));
-
-    return [].concat(spells, monsters);
-  };
-
   public render() {
     const { data } = this.props;
     const { showOmnibar } = this.state;
@@ -44,19 +27,10 @@ export class Dashboard extends React.Component<IDashboardProps, any> {
       <React.Fragment>
         <HotKey hotkey="s" shift onTrigger={this.toggleOmnibar} />
 
-        <Omnibar
-          isOpen={showOmnibar}
-          items={this.generateOmnibarItems(data)}
-          itemRenderer={item => (
-            <div>
-              {item.name} : {item.type}
-            </div>
-          )}
-          onItemSelect={item => {
-            console.log("Item selected: ", item);
-            this.toggleOmnibar();
-          }}
-          resetOnSelect
+        <GlobalSearch
+          data={data}
+          showOmnibar={showOmnibar}
+          toggle={this.toggleOmnibar}
         />
 
         <Row>
