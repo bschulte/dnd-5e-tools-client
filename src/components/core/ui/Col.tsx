@@ -1,6 +1,5 @@
 import * as React from "react";
 import classNames from "classnames";
-import { auto } from "async";
 
 export interface IColProps {
   size?: 1 | 2 | 3 | 4 | 5 | 6;
@@ -22,7 +21,7 @@ export class Col extends React.Component<IColProps, any> {
     } = this.props;
     return (
       <div
-        className={classNames({
+        className={classNames("p-1", {
           "flex-1": auto,
           // Regular sizes
           "w-1/6": size === 1,

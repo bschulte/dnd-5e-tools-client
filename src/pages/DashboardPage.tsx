@@ -3,7 +3,7 @@ import * as React from "react";
 import { HotKey, Modal, PageContainer, GraphqlQuery } from "../components/core";
 import { Dashboard } from "../components/Dashboard/Dashboard";
 
-import { getSpells } from "../graphql/queries";
+import { dashboardQuery } from "../graphql/queries";
 
 export interface IDashboardProps {}
 
@@ -27,7 +27,7 @@ export default class DashboardPage extends React.Component<
         <HotKey hotkey="s" shift onTrigger={this.toggleModal} />
         <Modal isOpen={showModal} toggle={this.toggleModal} />
 
-        <GraphqlQuery query={getSpells} component={Dashboard} />
+        <GraphqlQuery query={dashboardQuery} component={Dashboard} />
       </PageContainer>
     );
   }
