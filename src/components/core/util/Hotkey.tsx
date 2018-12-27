@@ -30,6 +30,10 @@ export class HotKey extends React.Component<IHotKeyProps, any> {
     document.addEventListener("keydown", this.handleKeyPress);
   };
 
+  componentWillUnmount() {
+    document.removeEventListener("keydown", this.handleKeyPress);
+  }
+
   public render() {
     return <div />;
   }
