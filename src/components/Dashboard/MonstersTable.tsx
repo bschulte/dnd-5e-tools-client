@@ -17,7 +17,7 @@ export default class MonstersTable extends React.Component<
         data={monsters}
         columns={[
           { Header: "CR", accessor: "cr", width: 75 },
-          { Header: "Name", accessor: "name" }
+          { Header: "Monster", accessor: "name" }
         ]}
         combinedFilter
         combinedFilterColumns={["name"]}

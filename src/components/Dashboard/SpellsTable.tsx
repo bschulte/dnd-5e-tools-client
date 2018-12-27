@@ -15,7 +15,7 @@ export class SpellsTable extends React.Component<ISpellsTableProps, any> {
         data={spells}
         columns={[
           { Header: "Level", accessor: "level", width: 50 },
-          { Header: "Name", accessor: "name" }
+          { Header: "Spell", accessor: "name" }
         ]}
         combinedFilter
         combinedFilterColumns={["name"]}
