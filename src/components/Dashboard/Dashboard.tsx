@@ -20,9 +20,7 @@ export class Dashboard extends React.Component<IDashboardProps, any> {
             </CardBody>
           </Card>
         </Col>
-        <Col sm={6} lg={3}>
-          <Input />
-        </Col>
+        <Col sm={6} lg={3} />
       </Row>
     );
   }

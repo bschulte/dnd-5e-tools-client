@@ -73,6 +73,7 @@ export class Table extends React.Component<
               onChange={(e: React.FormEvent<HTMLInputElement>) =>
                 this.setState({ searchStr: e.currentTarget.value })
               }
+              icon="fas fa-search"
             />
           </div>
         )}
