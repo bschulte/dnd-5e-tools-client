@@ -2,8 +2,9 @@ import * as React from "react";
 import { Omnibar } from "@blueprintjs/select";
 import Fuse from "fuse.js";
 import classNames from "classnames";
+import { Grid, Row, Col } from "react-flexbox-grid";
 
-import { HotKey } from "../core";
+import { HotKey, Badge } from "../core";
 
 interface IGlobalSearchProps {
   data: any;
@@ -92,12 +93,14 @@ export default class GlobalSearch extends React.Component<
           itemRenderer={(item: any, { modifiers }: any) => {
             return (
               <div
-                key={item.name}
-                className={classNames("py-2 px-1 border-b-2", {
+                className={classNames("py-2 px-1 border-b-2 flex", {
                   "bg-grey-dark text-white": modifiers.active
                 })}
               >
-                {item.name} : {item.type}
+                <div key={item.name}>{item.name}</div>
+                <Badge color={item.type === "Monster" ? "blue" : "purple"}>
+                  {item.type}
+                </Badge>
               </div>
             );
           }}

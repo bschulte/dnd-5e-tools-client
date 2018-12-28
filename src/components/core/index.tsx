@@ -7,6 +7,7 @@ import { CardHeader } from "./ui/CardHeader";
 import { CardBody } from "./ui/CardBody";
 import { PageContainer } from "./ui/PageContainer";
 import { Input } from "./ui/Input";
+import { Badge } from "./ui/Badge";
 
 import { GraphqlQuery } from "./util/Query";
 
@@ -23,5 +24,6 @@ export {
   Card,
   CardHeader,
   CardBody,
-  Input
+  Input,
+  Badge
 };
