@@ -1,17 +1,42 @@
 import * as React from "react";
 import { Omnibar } from "@blueprintjs/select";
+import Fuse from "fuse.js";
+import classNames from "classnames";
+
 import { HotKey } from "../core";
 
-export interface IGlobalSearchProps {
-  data: any[];
+interface IGlobalSearchProps {
+  data: any;
   showOmnibar: boolean;
   toggle: () => void;
 }
 
+interface IGlobalSearchState {
+  searchStr: string;
+  items: any[];
+}
+
 export default class GlobalSearch extends React.Component<
   IGlobalSearchProps,
-  any
+  IGlobalSearchState
 > {
+  state: Readonly<IGlobalSearchState> = {
+    searchStr: "",
+    items: []
+  };
+
+  componentWillUpdate(nextProps: IGlobalSearchProps) {
+    const { data } = nextProps;
+    const { items } = this.state;
+    if (
+      data.spells.length > 0 &&
+      data.monsters.length > 0 &&
+      items.length === 0
+    ) {
+      this.setState({ items: this.generateOmnibarItems(data) });
+    }
+  }
+
   generateOmnibarItems = (data: any) => {
     if (!("spells" in data) || !("monsters" in data)) {
       return [];
@@ -29,32 +54,60 @@ export default class GlobalSearch extends React.Component<
     return [].concat(spells, monsters);
   };
 
+  filterItems = (items: any[], searchStr: string) => {
+    const options = {
+      shouldSort: true,
+      threshold: 0.6,
+      location: 0,
+      distance: 100,
+      maxPatternLength: 32,
+      minMatchCharLength: 1,
+      keys: ["name", "type"]
+    };
+
+    const fuse = new Fuse(items, options);
+
+    return fuse.search(searchStr);
+  };
+
   public render() {
-    const { data, showOmnibar, toggle } = this.props;
+    const { showOmnibar, toggle, data } = this.props;
+    const { searchStr, items } = this.state;
+
+    const filteredItems = this.filterItems(items, searchStr);
+
     return (
       <React.Fragment>
         {showOmnibar && (
           <HotKey
             hotkey="escape"
             onTrigger={() => {
-              console.log("Escape pressed");
               toggle();
             }}
           />
         )}
         <Omnibar
           isOpen={showOmnibar}
-          items={this.generateOmnibarItems(data)}
-          itemRenderer={(item: any) => (
-            <div>
-              {item.name} : {item.type}
-            </div>
-          )}
+          items={filteredItems}
+          itemRenderer={(item: any, { modifiers }: any) => {
+            return (
+              <div
+                key={item.name}
+                className={classNames("py-2 px-1 border-b-2", {
+                  "bg-grey-dark text-white": modifiers.active
+                })}
+              >
+                {item.name} : {item.type}
+              </div>
+            );
+          }}
           onItemSelect={(item: any) => {
             console.log("Item selected: ", item);
             toggle();
           }}
           resetOnSelect
+          query={searchStr}
+          onQueryChange={(searchStr: string) => this.setState({ searchStr })}
         />
       </React.Fragment>
     );
