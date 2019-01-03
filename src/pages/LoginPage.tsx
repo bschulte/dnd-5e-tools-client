@@ -13,18 +13,27 @@ export default class LoginPage extends React.Component<
     password: ""
   };
 
+  handleLoginSuccess = (data: any) => {
+    console.log("Logged in, storing token in local storage:", data);
+
+    localStorage.setItem("token", data.login);
+
+    this.props.history.push("/");
+  };
+
   public render() {
     const { email, password } = this.state;
 
     return (
       <Mutation mutation={LOGIN}>
         {(login, { data, error, loading }) => {
-          console.log("Error:", error);
           return (
             <div className="mt-16 mx-auto" style={{ width: 400 }}>
+              {data && this.handleLoginSuccess(data)}
               {error && (
                 <Alert
                   message={"Invalid email/password"}
+                  title="Error"
                   error
                   className="mb-2"
                 />
@@ -56,9 +65,9 @@ export default class LoginPage extends React.Component<
                     primary
                     block
                     className="mt-4"
-                    onClick={() =>
-                      login({ variables: { userData: { email, password } } })
-                    }
+                    onClick={() => {
+                      login({ variables: { userData: { email, password } } });
+                    }}
                   >
                     Login
                   </Button>

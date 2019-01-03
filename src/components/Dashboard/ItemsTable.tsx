@@ -1,0 +1,29 @@
+import * as React from "react";
+import { Table } from "../core";
+
+export interface IItemsTableProps {
+  items: any[];
+}
+
+export default class ItemsTable extends React.Component<IItemsTableProps, any> {
+  public render() {
+    const { items } = this.props;
+    return (
+      <Table
+        data={items}
+        columns={[{ Header: "Item", accessor: "name" }]}
+        combinedFilter
+        combinedFilterColumns={["name"]}
+        getTdProps={(_: any, rowInfo: any, column: any) => {
+          return {
+            onClick: () => {
+              console.log("Row was clicked:", rowInfo);
+            }
+          };
+        }}
+        showPageSizeOptions={false}
+        showPageJump={false}
+      />
+    );
+  }
+}

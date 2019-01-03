@@ -12,6 +12,10 @@ export const DASHBOARD_QUERY = gql`
       name
       cr
     }
+    items {
+      id
+      name
+    }
   }
 `;
 

@@ -4,6 +4,7 @@ import { Row, Col, Card, CardBody, CardHeader, HotKey } from "../core";
 import { SpellsTable } from "./SpellsTable";
 import MonstersTable from "./MonstersTable";
 import GlobalSearch from "./GlobalSearch";
+import ItemsTable from "./ItemsTable";
 
 export interface IDashboardProps {
   data: any;
@@ -34,7 +35,7 @@ export class Dashboard extends React.Component<IDashboardProps, any> {
         />
 
         <Row>
-          <Col sm={6} lg={3}>
+          <Col sm={6} lg={2}>
             <Card>
               <CardHeader title="Spells" />
               <CardBody>
@@ -42,11 +43,19 @@ export class Dashboard extends React.Component<IDashboardProps, any> {
               </CardBody>
             </Card>
           </Col>
-          <Col sm={6} lg={3}>
+          <Col sm={6} lg={2}>
             <Card>
               <CardHeader title="Monsters" />
               <CardBody>
                 <MonstersTable monsters={data.monsters} />
+              </CardBody>
+            </Card>
+          </Col>
+          <Col sm={6} lg={2}>
+            <Card>
+              <CardHeader title="Items" />
+              <CardBody>
+                <ItemsTable items={data.items} />
               </CardBody>
             </Card>
           </Col>
