@@ -3,7 +3,7 @@ import * as React from "react";
 import { PageContainer, GraphqlQuery } from "../components/core";
 import { Dashboard } from "../components/Dashboard/Dashboard";
 
-import { dashboardQuery } from "../graphql/queries";
+import { DASHBOARD_QUERY } from "../graphql/queries";
 
 export interface IDashboardProps {}
 
@@ -14,7 +14,7 @@ export default class DashboardPage extends React.Component<
   public render() {
     return (
       <PageContainer>
-        <GraphqlQuery query={dashboardQuery} component={Dashboard} />
+        <GraphqlQuery query={DASHBOARD_QUERY} component={Dashboard} />
       </PageContainer>
     );
   }

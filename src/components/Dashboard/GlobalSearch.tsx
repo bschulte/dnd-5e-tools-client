@@ -96,9 +96,13 @@ export default class GlobalSearch extends React.Component<
                 className={classNames("py-2 px-1 border-b-2 flex", {
                   "bg-grey-dark text-white": modifiers.active
                 })}
+                key={item.name}
               >
-                <div key={item.name}>{item.name}</div>
-                <Badge color={item.type === "Monster" ? "blue" : "purple"}>
+                <div>{item.name}</div>
+                <Badge
+                  color={item.type === "Monster" ? "blue" : "purple"}
+                  className="ml-4"
+                >
                   {item.type}
                 </Badge>
               </div>

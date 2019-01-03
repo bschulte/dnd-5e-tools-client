@@ -136,6 +136,9 @@ let colors = {
   "smoke-lightest": "rgba(0, 0, 0, 0.1)"
 };
 
+colors.primary = colors["indigo-dark"];
+colors["primary-darker"] = colors["indigo-darker"];
+
 module.exports = {
   /*
   |-----------------------------------------------------------------------------

@@ -14,11 +14,12 @@ export interface IBadgeProps {
     | "indigo"
     | "purple"
     | "pink";
+  className?: string;
 }
 
 export class Badge extends React.Component<IBadgeProps, any> {
   public render() {
-    const { children, color } = this.props;
+    const { children, color, className } = this.props;
     return (
       <div
         className={classNames(
@@ -34,7 +35,8 @@ export class Badge extends React.Component<IBadgeProps, any> {
             "bg-indigo": color === "indigo",
             "bg-purple": color === "purple",
             "bg-pink": color === "pink"
-          }
+          },
+          className
         )}
       >
         {children}

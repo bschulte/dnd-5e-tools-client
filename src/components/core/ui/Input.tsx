@@ -3,6 +3,9 @@ import classNames from "classnames";
 
 interface IInputProps {
   icon?: string;
+  label?: string;
+  block?: boolean;
+  inputClassName?: string;
 }
 
 export class Input extends React.Component<
@@ -10,12 +13,21 @@ export class Input extends React.Component<
   any
 > {
   public render() {
-    const { className, icon } = this.props;
+    const { className, inputClassName, icon, block, label } = this.props;
     const filteredProps = { ...this.props };
     delete filteredProps.className;
 
     return (
-      <div>
+      <div
+        className={classNames(className, {
+          "w-full": block
+        })}
+      >
+        {label && (
+          <p className="mb-2 font-bold font-roboto-condensed uppercase">
+            {label}
+          </p>
+        )}
         {icon && (
           <i
             className={classNames(icon, "absolute ml-3")}
@@ -25,11 +37,15 @@ export class Input extends React.Component<
         <input
           className={classNames(
             "bg-grey-darker text-grey-light p-2 focus:outline-none appearance-none border border-grey rounded shadow focus:shadow-outline",
-            className
+            inputClassName,
+            {
+              "w-full": block
+            }
           )}
           {...filteredProps}
           style={{
-            textIndent: icon ? 25 : 0
+            textIndent: icon ? 25 : 0,
+            transition: "box-shadow 150ms linear"
           }}
         />
       </div>
