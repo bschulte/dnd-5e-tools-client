@@ -10,6 +10,7 @@ export { Input } from "./ui/Input";
 export { Badge } from "./ui/Badge";
 export { HR } from "./ui/HR";
 export { Button } from "./ui/Button";
+export { Alert } from "./ui/Alert";
 
 export { GraphqlQuery } from "./util/Query";
 
