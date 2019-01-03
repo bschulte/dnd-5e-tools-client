@@ -2,7 +2,7 @@ import * as React from "react";
 import { Omnibar } from "@blueprintjs/select";
 import Fuse from "fuse.js";
 import classNames from "classnames";
-import { Grid, Row, Col } from "react-flexbox-grid";
+import { debounce } from "../../util";
 
 import { HotKey, Badge } from "../core";
 
@@ -15,6 +15,7 @@ interface IGlobalSearchProps {
 interface IGlobalSearchState {
   searchStr: string;
   items: any[];
+  activeItem: any;
 }
 
 export default class GlobalSearch extends React.Component<
@@ -23,7 +24,8 @@ export default class GlobalSearch extends React.Component<
 > {
   state: Readonly<IGlobalSearchState> = {
     searchStr: "",
-    items: []
+    items: [],
+    activeItem: null
   };
 
   componentWillUpdate(nextProps: IGlobalSearchProps) {
@@ -51,8 +53,12 @@ export default class GlobalSearch extends React.Component<
       name: monster.name,
       type: "Monster"
     }));
+    const items = data.items.map((item: any) => ({
+      name: item.name,
+      type: "Item"
+    }));
 
-    return [].concat(spells, monsters);
+    return [].concat(spells, monsters, items);
   };
 
   filterItems = (items: any[], searchStr: string) => {
@@ -71,9 +77,19 @@ export default class GlobalSearch extends React.Component<
     return fuse.search(searchStr);
   };
 
+  handleSearchStrChange = (searchStr: string) => {
+    console.log("Setting search str:", searchStr);
+    this.setState({ searchStr });
+  };
+
+  handleActiveItemChange = (activeItem: any) => {
+    console.log("Setting active item:", activeItem);
+    this.setState({ activeItem });
+  };
+
   public render() {
-    const { showOmnibar, toggle, data } = this.props;
-    const { searchStr, items } = this.state;
+    const { showOmnibar, toggle } = this.props;
+    const { searchStr, items, activeItem } = this.state;
 
     const filteredItems = this.filterItems(items, searchStr);
 
@@ -83,7 +99,9 @@ export default class GlobalSearch extends React.Component<
           <HotKey
             hotkey="escape"
             onTrigger={() => {
-              toggle();
+              this.setState({ searchStr: "" }, () => {
+                toggle();
+              });
             }}
           />
         )}
@@ -96,11 +114,17 @@ export default class GlobalSearch extends React.Component<
                 className={classNames("py-2 px-1 border-b-2 flex", {
                   "bg-grey-dark text-white": modifiers.active
                 })}
-                key={item.name}
+                key={item.name + item.type}
               >
                 <div>{item.name}</div>
                 <Badge
-                  color={item.type === "Monster" ? "blue" : "purple"}
+                  color={
+                    item.type === "Monster"
+                      ? "blue"
+                      : item.type === "Spell"
+                      ? "purple"
+                      : "teal"
+                  }
                   className="ml-4"
                 >
                   {item.type}
@@ -114,7 +138,9 @@ export default class GlobalSearch extends React.Component<
           }}
           resetOnSelect
           query={searchStr}
-          onQueryChange={(searchStr: string) => this.setState({ searchStr })}
+          onQueryChange={this.handleSearchStrChange}
+          activeItem={activeItem || filteredItems[0]}
+          onActiveItemChange={this.handleActiveItemChange}
         />
       </React.Fragment>
     );

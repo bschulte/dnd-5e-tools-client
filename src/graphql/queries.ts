@@ -15,6 +15,7 @@ export const DASHBOARD_QUERY = gql`
     items {
       id
       name
+      value
     }
   }
 `;

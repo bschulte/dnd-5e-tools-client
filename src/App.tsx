@@ -1,6 +1,7 @@
 import React, { Component } from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { Router, Route, Switch } from "react-router-dom";
 import { ApolloProvider } from "react-apollo";
+import { history } from "./history";
 
 import { client } from "./graphql/client";
 
@@ -12,7 +13,7 @@ class App extends Component<any, any> {
     return (
       <div className="animated fadeIn">
         <ApolloProvider client={client}>
-          <Router>
+          <Router history={history}>
             <Switch>
               <Route path="/login" component={LoginPage} />
               <Route path="/" exact component={DashboardPage} />

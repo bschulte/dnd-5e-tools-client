@@ -11,7 +11,10 @@ export default class ItemsTable extends React.Component<IItemsTableProps, any> {
     return (
       <Table
         data={items}
-        columns={[{ Header: "Item", accessor: "name" }]}
+        columns={[
+          { Header: "Item", accessor: "name" },
+          { Header: "Value", accessor: "value", width: 100 }
+        ]}
         combinedFilter
         combinedFilterColumns={["name"]}
         getTdProps={(_: any, rowInfo: any, column: any) => {
