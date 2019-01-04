@@ -68,6 +68,15 @@ export default class GlobalSearch extends React.Component<
     this.setState({ searchStr, filteredItems, activeItem: filteredItems[0] });
   };
 
+  handleInputKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    const { activeItem } = this.state;
+    const { toggle } = this.props;
+    if (e.key === "Enter") {
+      console.log("Selecting active element:", activeItem);
+      toggle();
+    }
+  };
+
   selectNextItem = () => {
     const { filteredItems, activeItem } = this.state;
     const { itemsToShow } = this.props;
@@ -117,6 +126,7 @@ export default class GlobalSearch extends React.Component<
           focusOnMount
           value={searchStr}
           onChange={e => this.handleSearchStrChange(e.currentTarget.value)}
+          onKeyPress={e => this.handleInputKeyPress(e)}
         />
         <List>
           {filteredItems.slice(0, itemsToShow).map(item => (

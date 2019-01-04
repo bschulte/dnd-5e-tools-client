@@ -26,14 +26,17 @@ export class Dashboard extends React.Component<IDashboardProps, any> {
     }
 
     const spells = data.spells.map((spell: any, index: number) => ({
+      id: spell.id,
       name: spell.name,
       type: "Spell"
     }));
     const monsters = data.monsters.map((monster: any, index: number) => ({
+      id: monster.id,
       name: monster.name,
       type: "Monster"
     }));
     const items = data.items.map((item: any, index: number) => ({
+      id: item.id,
       name: item.name,
       type: "Item"
     }));
