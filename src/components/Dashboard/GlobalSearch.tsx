@@ -1,19 +1,20 @@
 import * as React from "react";
 import Fuse from "fuse.js";
 import classNames from "classnames";
-import { debounce } from "../../util";
 
-import { Modal, Input } from "../core";
+import { Modal, Input, List, HotKey } from "../core";
+import { ListItem } from "../core/ui/ListItem";
 
 interface IGlobalSearchProps {
-  data: any;
+  items: any[];
   showOmnibar: boolean;
   toggle: () => void;
+  itemsToShow: number;
 }
 
 interface IGlobalSearchState {
   searchStr: string;
-  items: any[];
+  filteredItems: any[];
   activeItem: any;
 }
 
@@ -21,48 +22,19 @@ export default class GlobalSearch extends React.Component<
   IGlobalSearchProps,
   IGlobalSearchState
 > {
+  public static defaultProps = {
+    itemsToShow: 10
+  };
+
   constructor(props: IGlobalSearchProps) {
     super(props);
 
     this.state = {
       searchStr: "",
-      items: [],
+      filteredItems: [],
       activeItem: null
     };
   }
-
-  componentWillUpdate(nextProps: IGlobalSearchProps) {
-    const { data } = nextProps;
-    const { items } = this.state;
-    if (
-      data.spells.length > 0 &&
-      data.monsters.length > 0 &&
-      items.length === 0
-    ) {
-      this.setState({ items: this.generateOmnibarItems(data) });
-    }
-  }
-
-  generateOmnibarItems = (data: any) => {
-    if (!("spells" in data) || !("monsters" in data)) {
-      return [];
-    }
-
-    const spells = data.spells.map((spell: any) => ({
-      name: spell.name,
-      type: "Spell"
-    }));
-    const monsters = data.monsters.map((monster: any) => ({
-      name: monster.name,
-      type: "Monster"
-    }));
-    const items = data.items.map((item: any) => ({
-      name: item.name,
-      type: "Item"
-    }));
-
-    return [].concat(spells, monsters, items);
-  };
 
   filterItems = (items: any[], searchStr: string) => {
     const options = {
@@ -80,62 +52,79 @@ export default class GlobalSearch extends React.Component<
     return fuse.search(searchStr);
   };
 
+  componentWillReceiveProps = (nextProps: IGlobalSearchProps) => {
+    const { showOmnibar } = this.props;
+    // We're going to close the modal, so let's reset our state
+    if (showOmnibar === true && nextProps.showOmnibar === false) {
+      this.setState({ filteredItems: [], searchStr: "" });
+    }
+  };
+
   handleSearchStrChange = (searchStr: string) => {
-    console.log("Setting search str:", searchStr);
-    this.setState({ searchStr });
-  };
-
-  handleActiveItemChange = (activeItem: any) => {
-    console.log("Setting active item:", activeItem);
-    this.setState({ activeItem });
-  };
-
-  public render() {
-    const { showOmnibar, toggle } = this.props;
-    const { searchStr, items, activeItem } = this.state;
+    const { items } = this.props;
 
     const filteredItems = this.filterItems(items, searchStr);
 
+    this.setState({ searchStr, filteredItems, activeItem: filteredItems[0] });
+  };
+
+  selectNextItem = () => {
+    const { filteredItems, activeItem } = this.state;
+    const { itemsToShow } = this.props;
+
+    let previousItemWasActive = false;
+    for (const item of filteredItems.slice(0, itemsToShow)) {
+      if (previousItemWasActive) {
+        this.setState({ activeItem: item });
+        return;
+      }
+
+      previousItemWasActive = item.key === activeItem.key;
+    }
+  };
+
+  selectPreviousItem = () => {
+    const { filteredItems, activeItem } = this.state;
+    const { itemsToShow } = this.props;
+
+    let previousItem: any = null;
+    for (const item of filteredItems.slice(0, itemsToShow)) {
+      if (item.key === activeItem.key) {
+        previousItem && this.setState({ activeItem: previousItem });
+        return;
+      }
+
+      previousItem = item;
+    }
+  };
+
+  public render() {
+    const { showOmnibar, toggle, itemsToShow } = this.props;
+    const { searchStr, filteredItems, activeItem } = this.state;
+
     return (
       <Modal isOpen={showOmnibar} toggle={toggle}>
-        <Input backgroundColor="light" block focusOnMount />
-        {/* <Omnibar
-          isOpen={showOmnibar}
-          items={filteredItems}
-          itemRenderer={(item: any, { modifiers }: any) => {
-            return (
-              <div
-                className={classNames("py-2 px-1 border-b-2 flex", {
-                  "bg-grey-dark text-white": modifiers.active
-                })}
-                key={item.name + item.type}
-              >
-                <div>{item.name}</div>
-                <Badge
-                  color={
-                    item.type === "Monster"
-                      ? "blue"
-                      : item.type === "Spell"
-                      ? "purple"
-                      : "teal"
-                  }
-                  className="ml-4"
-                >
-                  {item.type}
-                </Badge>
-              </div>
-            );
-          }}
-          onItemSelect={(item: any) => {
-            console.log("Item selected: ", item);
-            toggle();
-          }}
-          resetOnSelect
-          query={searchStr}
-          onQueryChange={this.handleSearchStrChange}
-          activeItem={activeItem || filteredItems[0]}
-          onActiveItemChange={this.handleActiveItemChange}
-        /> */}
+        {showOmnibar && (
+          <React.Fragment>
+            <HotKey hotkey="n" ctrl onTrigger={this.selectNextItem} />
+            <HotKey hotkey="ArrowDown" onTrigger={this.selectNextItem} />
+            <HotKey hotkey="p" ctrl onTrigger={this.selectPreviousItem} />
+            <HotKey hotkey="ArrowUp" onTrigger={this.selectPreviousItem} />
+          </React.Fragment>
+        )}
+        <Input
+          block
+          focusOnMount
+          value={searchStr}
+          onChange={e => this.handleSearchStrChange(e.currentTarget.value)}
+        />
+        <List>
+          {filteredItems.slice(0, itemsToShow).map(item => (
+            <ListItem key={item.key} active={activeItem.key === item.key}>
+              {item.name}
+            </ListItem>
+          ))}
+        </List>
       </Modal>
     );
   }

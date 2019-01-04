@@ -54,7 +54,7 @@ export class Modal extends React.Component<IModalProps, any> {
           {/* Modal content */}
           <div
             className={classNames(
-              "animated faster relative p-8 bg-grey-darker w-full mx-auto mb-auto mt-16 max-w-md flex-col flex",
+              "animated faster relative p-8 bg-grey-darkest w-full mx-auto mb-auto mt-16 max-w-md flex-col flex",
               { slideInUp: isOpen },
               { slideOutDown: !isOpen }
             )}

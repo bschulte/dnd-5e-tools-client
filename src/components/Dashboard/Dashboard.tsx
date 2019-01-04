@@ -20,16 +20,41 @@ export class Dashboard extends React.Component<IDashboardProps, any> {
     this.setState({ showOmnibar: !showOmnibar });
   };
 
+  generateOmnibarItems = (data: any) => {
+    if (!("spells" in data) || !("monsters" in data) || !("items" in data)) {
+      return [];
+    }
+
+    const spells = data.spells.map((spell: any, index: number) => ({
+      name: spell.name,
+      type: "Spell"
+    }));
+    const monsters = data.monsters.map((monster: any, index: number) => ({
+      name: monster.name,
+      type: "Monster"
+    }));
+    const items = data.items.map((item: any, index: number) => ({
+      name: item.name,
+      type: "Item"
+    }));
+
+    return []
+      .concat(spells, monsters, items)
+      .map((item, index: number) => ({ ...item, key: index }));
+  };
+
   public render() {
     const { data } = this.props;
     const { showOmnibar } = this.state;
+
+    const items = this.generateOmnibarItems(data);
 
     return (
       <React.Fragment>
         <HotKey hotkey="s" shift onTrigger={this.toggleOmnibar} />
 
         <GlobalSearch
-          data={data}
+          items={items}
           showOmnibar={showOmnibar}
           toggle={this.toggleOmnibar}
         />

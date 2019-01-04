@@ -2,6 +2,7 @@ import * as React from "react";
 
 export interface IHotKeyProps {
   shift?: boolean;
+  ctrl?: boolean;
   hotkey: string;
   onTrigger: () => void;
   debug?: boolean;
@@ -9,20 +10,16 @@ export interface IHotKeyProps {
 
 export class HotKey extends React.Component<IHotKeyProps, any> {
   handleKeyPress = (e: KeyboardEvent) => {
-    const { shift, hotkey, onTrigger, debug } = this.props;
+    const { shift, hotkey, onTrigger, debug, ctrl } = this.props;
 
     debug && console.log(e);
 
+    if (shift && !e.shiftKey) return;
+    if (ctrl && !e.ctrlKey) return;
+
     if (e.key.toUpperCase() === hotkey.toUpperCase()) {
-      if (shift) {
-        if (e.shiftKey) {
-          e.preventDefault();
-          onTrigger();
-        }
-      } else {
-        e.preventDefault();
-        onTrigger();
-      }
+      e.preventDefault();
+      onTrigger();
     }
   };
 

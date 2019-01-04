@@ -37,11 +37,9 @@ export class Input extends React.Component<
       icon,
       block,
       label,
-      backgroundColor = "dark"
+      focusOnMount,
+      ...otherProps
     } = this.props;
-    const filteredProps = { ...this.props };
-    delete filteredProps.className;
-
     return (
       <div
         className={classNames(className, {
@@ -61,20 +59,18 @@ export class Input extends React.Component<
         )}
         <input
           className={classNames(
-            "p-2 focus:outline-none appearance-none border border-grey rounded shadow focus:shadow-outline",
+            "bg-grey-darker text-grey-light p-2 focus:outline-none appearance-none border border-grey rounded shadow focus:shadow-outline",
             inputClassName,
             {
-              "w-full": block,
-              "bg-grey-darker text-grey-light": backgroundColor === "dark",
-              "bg-grey text-black": backgroundColor === "light"
+              "w-full": block
             }
           )}
-          {...filteredProps}
           style={{
             textIndent: icon ? 25 : 0,
             transition: "box-shadow 150ms linear"
           }}
           ref={this.searchInput}
+          {...otherProps}
         />
       </div>
     );
