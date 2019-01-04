@@ -4,6 +4,7 @@ import classNames from "classnames";
 import { HotKey } from "..";
 
 export interface IModalProps {
+  children: React.ReactNode;
   isOpen: boolean;
   toggle: () => void;
   escapeClose?: boolean;
@@ -16,7 +17,8 @@ export class Modal extends React.Component<IModalProps, any> {
       isOpen,
       toggle,
       escapeClose = true,
-      backgroundClickClose = true
+      backgroundClickClose = true,
+      children
     } = this.props;
 
     if (!isOpen) {
@@ -52,7 +54,7 @@ export class Modal extends React.Component<IModalProps, any> {
           {/* Modal content */}
           <div
             className={classNames(
-              "animated faster relative p-8 bg-white w-full mx-auto mb-auto mt-16 max-w-md flex-col flex",
+              "animated faster relative p-8 bg-grey-darker w-full mx-auto mb-auto mt-16 max-w-md flex-col flex",
               { slideInUp: isOpen },
               { slideOutDown: !isOpen }
             )}
@@ -62,7 +64,7 @@ export class Modal extends React.Component<IModalProps, any> {
             */
             onClick={(e: React.MouseEvent) => e.stopPropagation()}
           >
-            Centered modal!
+            {children}
           </div>
         </div>
       </React.Fragment>

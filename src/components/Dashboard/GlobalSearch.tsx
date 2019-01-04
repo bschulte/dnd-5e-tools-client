@@ -1,10 +1,9 @@
 import * as React from "react";
-import { Omnibar } from "@blueprintjs/select";
 import Fuse from "fuse.js";
 import classNames from "classnames";
 import { debounce } from "../../util";
 
-import { HotKey, Badge } from "../core";
+import { Modal, Input } from "../core";
 
 interface IGlobalSearchProps {
   data: any;
@@ -22,11 +21,15 @@ export default class GlobalSearch extends React.Component<
   IGlobalSearchProps,
   IGlobalSearchState
 > {
-  state: Readonly<IGlobalSearchState> = {
-    searchStr: "",
-    items: [],
-    activeItem: null
-  };
+  constructor(props: IGlobalSearchProps) {
+    super(props);
+
+    this.state = {
+      searchStr: "",
+      items: [],
+      activeItem: null
+    };
+  }
 
   componentWillUpdate(nextProps: IGlobalSearchProps) {
     const { data } = nextProps;
@@ -94,18 +97,9 @@ export default class GlobalSearch extends React.Component<
     const filteredItems = this.filterItems(items, searchStr);
 
     return (
-      <React.Fragment>
-        {showOmnibar && (
-          <HotKey
-            hotkey="escape"
-            onTrigger={() => {
-              this.setState({ searchStr: "" }, () => {
-                toggle();
-              });
-            }}
-          />
-        )}
-        <Omnibar
+      <Modal isOpen={showOmnibar} toggle={toggle}>
+        <Input backgroundColor="light" block focusOnMount />
+        {/* <Omnibar
           isOpen={showOmnibar}
           items={filteredItems}
           itemRenderer={(item: any, { modifiers }: any) => {
@@ -141,8 +135,8 @@ export default class GlobalSearch extends React.Component<
           onQueryChange={this.handleSearchStrChange}
           activeItem={activeItem || filteredItems[0]}
           onActiveItemChange={this.handleActiveItemChange}
-        />
-      </React.Fragment>
+        /> */}
+      </Modal>
     );
   }
 }

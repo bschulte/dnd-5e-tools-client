@@ -6,8 +6,6 @@ import * as serviceWorker from "./serviceWorker";
 import "animate.css/animate.min.css";
 import "@fortawesome/fontawesome-pro/css/all.min.css";
 import "react-table/react-table.css";
-import "@blueprintjs/select/lib/css/blueprint-select.css";
-import "@blueprintjs/core/lib/css/blueprint.css";
 
 ReactDOM.render(<App />, document.getElementById("root"));
 
