@@ -1,6 +1,5 @@
 import * as React from "react";
 import Fuse from "fuse.js";
-import classNames from "classnames";
 
 import { client } from "../../graphql/client";
 import { Modal, Input, List, HotKey } from "../core";

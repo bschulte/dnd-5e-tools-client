@@ -38,20 +38,36 @@ export const client = new ApolloClient({
         __typename: "DetailsModalData",
         isOpen: false,
         type: null,
-        id: null
+        databaseId: null
       }
     },
     resolvers: {
       Mutation: {
-        showDetailsModal: (
+        hideDetailsModal: (
           _: any,
-          { id, type }: any,
+          _args: any,
           { cache }: { cache: ApolloCache<InMemoryCache> }
         ): void => {
           const data = {
             detailsModal: {
               __typename: "DetailsModalData",
-              id,
+              isOpen: false
+            }
+          };
+
+          cache.writeData({ data });
+          return null;
+        },
+
+        showDetailsModal: (
+          _: any,
+          { databaseId, type }: any,
+          { cache }: { cache: ApolloCache<InMemoryCache> }
+        ): void => {
+          const data = {
+            detailsModal: {
+              __typename: "DetailsModalData",
+              databaseId,
               type,
               isOpen: true
             }

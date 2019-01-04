@@ -15,6 +15,7 @@ import GlobalSearch from "./GlobalSearch";
 import ItemsTable from "./ItemsTable";
 import { GET_DETAILS_MODAL } from "../../graphql/localState/queries";
 import { Query } from "react-apollo";
+import DetailsModal from "./DetailsModal";
 
 export interface IDashboardProps {
   data: any;
@@ -74,7 +75,10 @@ export class Dashboard extends React.Component<IDashboardProps, any> {
         <Row>
           <Col sm={6}>
             <Query query={GET_DETAILS_MODAL}>
-              {({ data }) => <div>{JSON.stringify(data)}</div>}
+              {({ data }) => {
+                console.log("data:", data);
+                return <DetailsModal isOpen={data.detailsModal.isOpen} />;
+              }}
             </Query>
           </Col>
         </Row>

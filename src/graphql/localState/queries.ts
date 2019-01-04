@@ -5,7 +5,7 @@ export const GET_DETAILS_MODAL = gql`
     detailsModal @client {
       isOpen
       type
-      id
+      databaseId
     }
   }
 `;
