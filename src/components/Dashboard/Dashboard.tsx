@@ -1,10 +1,20 @@
 import * as React from "react";
 
-import { Row, Col, Card, CardBody, CardHeader, HotKey } from "../core";
+import {
+  Row,
+  Col,
+  Card,
+  CardBody,
+  CardHeader,
+  HotKey,
+  GraphqlQuery
+} from "../core";
 import { SpellsTable } from "./SpellsTable";
 import MonstersTable from "./MonstersTable";
 import GlobalSearch from "./GlobalSearch";
 import ItemsTable from "./ItemsTable";
+import { GET_DETAILS_MODAL } from "../../graphql/localState/queries";
+import { Query } from "react-apollo";
 
 export interface IDashboardProps {
   data: any;
@@ -25,17 +35,17 @@ export class Dashboard extends React.Component<IDashboardProps, any> {
       return [];
     }
 
-    const spells = data.spells.map((spell: any, index: number) => ({
+    const spells = data.spells.map((spell: any) => ({
       id: spell.id,
       name: spell.name,
       type: "Spell"
     }));
-    const monsters = data.monsters.map((monster: any, index: number) => ({
+    const monsters = data.monsters.map((monster: any) => ({
       id: monster.id,
       name: monster.name,
       type: "Monster"
     }));
-    const items = data.items.map((item: any, index: number) => ({
+    const items = data.items.map((item: any) => ({
       id: item.id,
       name: item.name,
       type: "Item"
@@ -61,6 +71,13 @@ export class Dashboard extends React.Component<IDashboardProps, any> {
           showOmnibar={showOmnibar}
           toggle={this.toggleOmnibar}
         />
+        <Row>
+          <Col sm={6}>
+            <Query query={GET_DETAILS_MODAL}>
+              {({ data }) => <div>{JSON.stringify(data)}</div>}
+            </Query>
+          </Col>
+        </Row>
 
         <Row>
           <Col sm={6} lg={2}>

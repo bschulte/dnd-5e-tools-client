@@ -1,6 +1,7 @@
-import ApolloClient from "apollo-boost";
+import ApolloClient, { InMemoryCache } from "apollo-boost";
 
 import { history } from "../history";
+import { Cache, ApolloCache } from "apollo-cache";
 
 export const client = new ApolloClient({
   uri: "http://localhost:4000/graphql",
@@ -28,6 +29,37 @@ export const client = new ApolloClient({
     }
     if (networkError) {
       console.log("Caught network error!", networkError);
+    }
+  },
+
+  clientState: {
+    defaults: {
+      detailsModal: {
+        __typename: "DetailsModalData",
+        isOpen: false,
+        type: null,
+        id: null
+      }
+    },
+    resolvers: {
+      Mutation: {
+        showDetailsModal: (
+          _: any,
+          { id, type }: any,
+          { cache }: { cache: ApolloCache<InMemoryCache> }
+        ): void => {
+          const data = {
+            detailsModal: {
+              __typename: "DetailsModalData",
+              id,
+              type,
+              isOpen: true
+            }
+          };
+          cache.writeData({ data });
+          return null;
+        }
+      }
     }
   }
 });
