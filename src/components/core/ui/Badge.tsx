@@ -15,16 +15,29 @@ export interface IBadgeProps {
     | "purple"
     | "pink";
   className?: string;
+  size?: "xs" | "sm" | "md" | "lg";
+  rounded?: boolean;
 }
 
 export class Badge extends React.Component<IBadgeProps, any> {
   public render() {
-    const { children, color = "blue", className } = this.props;
+    const {
+      children,
+      color = "blue",
+      className,
+      size = "xs",
+      rounded = true
+    } = this.props;
     return (
       <span
         className={classNames(
-          "px-2 py-1 rounded-full uppercase font-bold mx-1 text-xs",
+          "px-2 py-1 uppercase font-bold mx-1",
+          `text-${size}`,
           `bg-${color}-dark`,
+          {
+            rounded: !rounded,
+            "rounded-full": rounded
+          },
           className
         )}
       >

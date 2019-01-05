@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Table } from "../core";
+import { DataTable } from "../core";
 
 export interface IItemsTableProps {
   items: any[];
@@ -9,7 +9,7 @@ export default class ItemsTable extends React.Component<IItemsTableProps, any> {
   public render() {
     const { items } = this.props;
     return (
-      <Table
+      <DataTable
         data={items}
         columns={[
           { Header: "Item", accessor: "name" },

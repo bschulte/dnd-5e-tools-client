@@ -1,6 +1,5 @@
 import * as React from "react";
-import { Table } from "../core";
-import { Column } from "react-table";
+import { DataTable } from "../core";
 
 interface ISpellsTableProps {
   spells: any[];
@@ -11,7 +10,7 @@ export class SpellsTable extends React.Component<ISpellsTableProps, any> {
     const { spells } = this.props;
 
     return (
-      <Table
+      <DataTable
         data={spells}
         columns={[
           { Header: "Level", accessor: "level", width: 50 },

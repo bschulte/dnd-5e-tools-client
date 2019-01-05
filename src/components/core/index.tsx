@@ -1,7 +1,7 @@
 export { Modal } from "./ui/Modal";
 export { Row } from "./ui/Row";
 export { Col } from "./ui/Col";
-export { Table } from "./ui/Table";
+export { DataTable } from "./ui/DataTable";
 export { Card } from "./ui/Card";
 export { CardHeader } from "./ui/CardHeader";
 export { CardBody } from "./ui/CardBody";
@@ -13,6 +13,12 @@ export { Button } from "./ui/Button";
 export { Alert } from "./ui/Alert";
 export { List } from "./ui/List";
 export { Label } from "./ui/Label";
+export { Table } from "./ui/Table/Table";
+export { TableHead } from "./ui/Table/TableHead";
+export { TableBody } from "./ui/Table/TableBody";
+export { TableHeader } from "./ui/Table/TableHeader";
+export { TableRow } from "./ui/Table/TableRow";
+export { TableCell } from "./ui/Table/TableCell";
 
 export { GraphqlQuery } from "./util/Query";
 

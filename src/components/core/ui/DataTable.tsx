@@ -37,7 +37,7 @@ interface ITableProps {
   combinedFilterColumns?: string[];
 }
 
-export class Table extends React.Component<
+export class DataTable extends React.Component<
   Partial<TableProps<any, any>> & ITableProps,
   any
 > {

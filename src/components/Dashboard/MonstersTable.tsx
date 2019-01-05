@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Table } from "../core";
+import { DataTable } from "../core";
 
 export interface IMonstersTableProps {
   monsters: any[];
@@ -13,7 +13,7 @@ export default class MonstersTable extends React.Component<
     const { monsters } = this.props;
 
     return (
-      <Table
+      <DataTable
         data={monsters}
         columns={[
           { Header: "CR", accessor: "cr", width: 75 },

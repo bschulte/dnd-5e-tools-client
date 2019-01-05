@@ -1,6 +1,9 @@
-☐ Spell details modal
+✔ Spell details modal @done(19-01-05 01:04)
 ☐ Monster details modal
 ☐ Item details modal
 ☐ Character tracker
 ☐ Encounter builder
 ☐ Player view of encounter
+
+# Bugs
+☐ 401 error is not being caught by Apollo client

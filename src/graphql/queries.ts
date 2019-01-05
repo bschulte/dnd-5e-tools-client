@@ -61,3 +61,53 @@ export const GET_SPELL_DETAILS = gql`
     }
   }
 `;
+
+export const GET_MONSTER_DETAILS = gql`
+  query monster($id: Float!) {
+    monster(id: $id) {
+      id
+      name
+      size
+      type
+      source
+      alignment
+      ac
+      hp
+      speed
+      str
+      dex
+      con
+      int
+      wis
+      cha
+      skills
+      immune
+      senses
+      passive
+      languages
+      cr
+      spells
+      legendaryGroup {
+        lairActions
+        lairActionsTitle
+        regionalEffectsTitle
+        regionalEffects
+      }
+      legendaries {
+        name
+        text
+        attack
+      }
+      traits {
+        name
+        text
+        attack
+      }
+      actions {
+        name
+        text
+        attack
+      }
+    }
+  }
+`;
