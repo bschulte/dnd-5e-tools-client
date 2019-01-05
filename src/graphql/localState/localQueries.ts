@@ -9,3 +9,9 @@ export const GET_DETAILS_MODAL = gql`
     }
   }
 `;
+
+export const IS_MODAL_OPEN = gql`
+  {
+    modalOpen @client
+  }
+`;

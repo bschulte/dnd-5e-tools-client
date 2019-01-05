@@ -2,7 +2,7 @@ import * as React from "react";
 import Fuse from "fuse.js";
 
 import { client } from "../../graphql/client";
-import { Modal, Input, List, HotKey } from "../core";
+import { Modal, Input, List, HotKey, Badge } from "../core";
 import { ListItem } from "../core/ui/ListItem";
 import { SHOW_DETAILS_MODAL } from "../../graphql/localState/localMutations";
 
@@ -76,7 +76,7 @@ export default class GlobalSearch extends React.Component<
       console.log("Selecting active element:", activeItem);
       client.mutate({
         mutation: SHOW_DETAILS_MODAL,
-        variables: { type: activeItem.type, id: activeItem.id }
+        variables: { type: activeItem.type, databaseId: activeItem.id }
       });
       toggle();
     }
@@ -136,7 +136,21 @@ export default class GlobalSearch extends React.Component<
         <List>
           {filteredItems.slice(0, itemsToShow).map(item => (
             <ListItem key={item.key} active={activeItem.key === item.key}>
-              {item.name}
+              <span>{item.name}</span>
+              <Badge
+                className="float-right"
+                color={
+                  item.key === activeItem.key
+                    ? "grey"
+                    : item.type === "Spell"
+                    ? "teal"
+                    : item.type === "Monster"
+                    ? "green"
+                    : "pink"
+                }
+              >
+                {item.type}
+              </Badge>
             </ListItem>
           ))}
         </List>

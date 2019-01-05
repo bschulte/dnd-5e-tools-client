@@ -20,56 +20,39 @@ export const DASHBOARD_QUERY = gql`
   }
 `;
 
-export const SPELL_DETAILS_QUERY = gql`
-  {
-    spell(id: "5bfa216faa9325fd9304f99c") {
+export const GET_SPELL_DETAILS = gql`
+  query spell($id: Float!) {
+    spell(id: $id) {
+      id
       name
       level
       school
-      time {
+      times {
         number
         unit
+        condition
       }
       range {
         type
-        distance {
-          amount
-          type
-        }
+        distanceType
+        distanceAmount
       }
       components {
-        v
-        s
-        m
-      }
-      duration
-      classes {
-        fromSubClass {
-          class {
-            name
-            source
-          }
-          subclass {
-            name
-            source
-          }
-        }
-        fromClassList {
-          name
-          source
-        }
+        verbal
+        somatic
+        materials
       }
       source
-      meta {
-        ritual
-        technomagic
-      }
-      entries
-      entriesHigherLevel {
+      durations {
         type
-        name
-        entries
+        durationType
+        durationAmount
+        condition
+        concentration
       }
+      ritual
+      entries
+      entriesHigherLevel
     }
   }
 `;

@@ -13,7 +13,10 @@ import { SpellsTable } from "./SpellsTable";
 import MonstersTable from "./MonstersTable";
 import GlobalSearch from "./GlobalSearch";
 import ItemsTable from "./ItemsTable";
-import { GET_DETAILS_MODAL } from "../../graphql/localState/queries";
+import {
+  GET_DETAILS_MODAL,
+  IS_MODAL_OPEN
+} from "../../graphql/localState/localQueries";
 import { Query } from "react-apollo";
 import DetailsModal from "./DetailsModal";
 
@@ -65,23 +68,34 @@ export class Dashboard extends React.Component<IDashboardProps, any> {
 
     return (
       <React.Fragment>
-        <HotKey hotkey="s" shift onTrigger={this.toggleOmnibar} />
+        <Query query={IS_MODAL_OPEN}>
+          {({ data }) => (
+            <React.Fragment>
+              {!data.modalOpen && (
+                <HotKey hotkey="s" shift onTrigger={this.toggleOmnibar} />
+              )}
+            </React.Fragment>
+          )}
+        </Query>
 
         <GlobalSearch
           items={items}
           showOmnibar={showOmnibar}
           toggle={this.toggleOmnibar}
         />
-        <Row>
-          <Col sm={6}>
-            <Query query={GET_DETAILS_MODAL}>
-              {({ data }) => {
-                console.log("data:", data);
-                return <DetailsModal isOpen={data.detailsModal.isOpen} />;
-              }}
-            </Query>
-          </Col>
-        </Row>
+
+        <Query query={GET_DETAILS_MODAL}>
+          {({ data }) => {
+            const { isOpen, databaseId, type } = data.detailsModal;
+            return (
+              <DetailsModal
+                isOpen={isOpen}
+                type={type}
+                databaseId={databaseId}
+              />
+            );
+          }}
+        </Query>
 
         <Row>
           <Col sm={6} lg={2}>

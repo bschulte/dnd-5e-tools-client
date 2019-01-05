@@ -1,7 +1,7 @@
 import ApolloClient, { InMemoryCache } from "apollo-boost";
 
 import { history } from "../history";
-import { Cache, ApolloCache } from "apollo-cache";
+import { ApolloCache } from "apollo-cache";
 
 export const client = new ApolloClient({
   uri: "http://localhost:4000/graphql",
@@ -39,8 +39,11 @@ export const client = new ApolloClient({
         isOpen: false,
         type: null,
         databaseId: null
-      }
+      },
+      // Flag to track globally if there is a modal open or not
+      modalOpen: false
     },
+
     resolvers: {
       Mutation: {
         hideDetailsModal: (
@@ -52,7 +55,8 @@ export const client = new ApolloClient({
             detailsModal: {
               __typename: "DetailsModalData",
               isOpen: false
-            }
+            },
+            modalOpen: false
           };
 
           cache.writeData({ data });
@@ -70,7 +74,8 @@ export const client = new ApolloClient({
               databaseId,
               type,
               isOpen: true
-            }
+            },
+            modalOpen: true
           };
           cache.writeData({ data });
           return null;

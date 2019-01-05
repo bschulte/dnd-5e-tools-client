@@ -7,6 +7,7 @@ import { Transition } from "react-spring";
 export interface IModalProps {
   children: React.ReactNode;
   isOpen: boolean;
+  size?: "sm" | "md" | "lg" | "xl";
   toggle: () => void;
   escapeClose?: boolean;
   backgroundClickClose?: boolean;
@@ -17,6 +18,7 @@ export class Modal extends React.Component<IModalProps, any> {
     const {
       isOpen,
       toggle,
+      size = "md",
       escapeClose = true,
       backgroundClickClose = true,
       children
@@ -74,7 +76,9 @@ export class Modal extends React.Component<IModalProps, any> {
                     (animationProps => (
                       <div
                         className={classNames(
-                          "relative p-8 bg-grey-darkest w-full mx-auto mb-auto mt-16 max-w-md flex-col flex"
+                          "relative p-8 bg-grey-darkest w-full",
+                          "mx-auto mb-auto mt-16 flex-col flex",
+                          `max-w-${size}`
                         )}
                         style={animationProps}
                         /*
