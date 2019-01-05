@@ -5,6 +5,7 @@ import { Modal } from "../core";
 import { HIDE_DETAILS_MODAL } from "../../graphql/localState/localMutations";
 import SpellDetailsModal from "../modals/SpellDetailsModal";
 import MonsterDetailsModal from "../modals/MonsterDetailsModal";
+import ItemDetailsModal from "../modals/ItemDetailsModal";
 
 export interface IDetailsModalProps {
   type?: "Monster" | "Spell" | "Item";
@@ -36,6 +37,14 @@ export default class DetailsModal extends React.Component<
           isOpen={isOpen}
           toggle={this.closeModal}
           monsterId={databaseId}
+        />
+      );
+    } else if (type === "Item") {
+      return (
+        <ItemDetailsModal
+          isOpen={isOpen}
+          toggle={this.closeModal}
+          itemId={databaseId}
         />
       );
     } else {

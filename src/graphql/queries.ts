@@ -111,3 +111,23 @@ export const GET_MONSTER_DETAILS = gql`
     }
   }
 `;
+
+export const GET_ITEM_DETAILS = gql`
+  query item($id: Float!) {
+    item(id: $id) {
+      id
+      name
+      type
+      rarity
+      wondrous
+      value
+      tier
+      ac
+      reqAttune
+      weight
+      source
+      page
+      entries
+    }
+  }
+`;
