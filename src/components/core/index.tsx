@@ -12,6 +12,7 @@ export { HR } from "./ui/HR";
 export { Button } from "./ui/Button";
 export { Alert } from "./ui/Alert";
 export { List } from "./ui/List";
+export { Label } from "./ui/Label";
 
 export { GraphqlQuery } from "./util/Query";
 

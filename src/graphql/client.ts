@@ -1,7 +1,7 @@
 import ApolloClient, { InMemoryCache } from "apollo-boost";
-
-import { history } from "../history";
 import { ApolloCache } from "apollo-cache";
+
+import { logout } from "../util/auth";
 
 export const client = new ApolloClient({
   uri: "http://localhost:4000/graphql",
@@ -17,18 +17,19 @@ export const client = new ApolloClient({
     }
   },
 
-  onError: ({ graphQLErrors, networkError }) => {
+  onError: ({ graphQLErrors, networkError }: any) => {
     if (graphQLErrors) {
       console.log("GraphQL error:", graphQLErrors);
-      graphQLErrors.forEach(error => {
+      graphQLErrors.forEach((error: any) => {
         if (error.message.includes("Access denied")) {
           console.log("Logging out user for having access denied!");
-          history.push("/login");
+          logout();
         }
       });
     }
     if (networkError) {
-      console.log("Caught network error!", networkError);
+      console.log("Caught network error:", networkError);
+      logout();
     }
   },
 

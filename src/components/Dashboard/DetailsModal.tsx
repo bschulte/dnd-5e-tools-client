@@ -21,7 +21,6 @@ export default class DetailsModal extends React.Component<
 
   public render() {
     const { isOpen, type, databaseId } = this.props;
-    console.log("Type:", type);
     if (type === "Spell") {
       return (
         <SpellDetailsModal

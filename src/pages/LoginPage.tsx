@@ -14,10 +14,7 @@ export default class LoginPage extends React.Component<
   };
 
   handleLoginSuccess = (data: any) => {
-    console.log("Logged in, storing token in local storage:", data);
-
     localStorage.setItem("token", data.login);
-
     this.props.history.push("/");
   };
 

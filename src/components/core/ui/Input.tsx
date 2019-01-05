@@ -1,5 +1,6 @@
 import * as React from "react";
 import classNames from "classnames";
+import { Label } from "./Label";
 
 interface IInputProps {
   icon?: string;
@@ -46,11 +47,7 @@ export class Input extends React.Component<
           "w-full": block
         })}
       >
-        {label && (
-          <p className="mb-2 font-bold font-roboto-condensed uppercase">
-            {label}
-          </p>
-        )}
+        {label && <Label text={label} />}
         {icon && (
           <i
             className={classNames(icon, "absolute ml-3")}

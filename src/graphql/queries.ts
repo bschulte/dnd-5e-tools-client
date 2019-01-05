@@ -32,6 +32,11 @@ export const GET_SPELL_DETAILS = gql`
         unit
         condition
       }
+      classes {
+        name
+        subclass
+        source
+      }
       range {
         type
         distanceType

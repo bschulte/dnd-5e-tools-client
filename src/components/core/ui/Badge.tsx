@@ -21,7 +21,7 @@ export class Badge extends React.Component<IBadgeProps, any> {
   public render() {
     const { children, color = "blue", className } = this.props;
     return (
-      <div
+      <span
         className={classNames(
           "px-2 py-1 rounded-full uppercase font-bold mx-1 text-xs",
           `bg-${color}-dark`,
@@ -29,7 +29,7 @@ export class Badge extends React.Component<IBadgeProps, any> {
         )}
       >
         {children}
-      </div>
+      </span>
     );
   }
 }
