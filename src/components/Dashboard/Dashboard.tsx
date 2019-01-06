@@ -100,7 +100,7 @@ export class Dashboard extends React.Component<IDashboardProps, any> {
         <Row>
           <Col sm={6} lg={2}>
             <Card>
-              <CardHeader title="Spells" />
+              <CardHeader title="Spells" accentColor="teal" />
               <CardBody>
                 <SpellsTable spells={data.spells} />
               </CardBody>
@@ -108,7 +108,7 @@ export class Dashboard extends React.Component<IDashboardProps, any> {
           </Col>
           <Col sm={6} lg={2}>
             <Card>
-              <CardHeader title="Monsters" />
+              <CardHeader title="Monsters" accentColor="purple" />
               <CardBody>
                 <MonstersTable monsters={data.monsters} />
               </CardBody>
@@ -116,7 +116,7 @@ export class Dashboard extends React.Component<IDashboardProps, any> {
           </Col>
           <Col sm={6} lg={2}>
             <Card>
-              <CardHeader title="Items" />
+              <CardHeader title="Items" accentColor="pink" />
               <CardBody>
                 <ItemsTable items={data.items} />
               </CardBody>
