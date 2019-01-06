@@ -23,7 +23,7 @@ export class CardHeader extends React.Component<ICardHeader, any> {
     const { title, accentColor = "black" } = this.props;
     return (
       <div
-        className={classNames("font-bold p-3 border-t-2", {
+        className={classNames("font-bold p-3 border-t-4", {
           "border-grey": accentColor === "grey",
           "border-red": accentColor === "red",
           "border-orange-dark": accentColor === "orange",
