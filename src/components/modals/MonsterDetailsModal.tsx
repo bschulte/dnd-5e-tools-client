@@ -89,8 +89,10 @@ const Skills: React.SFC<{ skills: string }> = ({ skills }) => {
   return (
     <Col auto>
       <StyledLabel text="skills" />
-      {skills.split(",").map(skill => (
-        <p className="text-sm capitalize">{skill}</p>
+      {skills.split(",").map((skill, index) => (
+        <p className="text-sm capitalize" key={index}>
+          {skill}
+        </p>
       ))}
     </Col>
   );
@@ -106,11 +108,13 @@ const Listing: React.SFC<{ list: any[]; title: string }> = ({
     <React.Fragment>
       <HR />
       <h3 className="mt-2">{title}</h3>
-      {list.map(item => (
-        <div className="mt-3">
+      {list.map((item, index) => (
+        <div className="mt-3" key={index}>
           <StyledLabel text={item.name} sm />
-          {item.text.map((t: string) => (
-            <p className="my-3">{t}</p>
+          {item.text.map((t: string, index: number) => (
+            <p className="my-3" key={`text-${index}`}>
+              {t}
+            </p>
           ))}
         </div>
       ))}

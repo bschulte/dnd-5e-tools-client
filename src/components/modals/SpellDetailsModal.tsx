@@ -32,20 +32,25 @@ const Classes: React.SFC<{ classes: any[] }> = ({ classes }) => (
   </div>
 );
 
-const CastTime: React.SFC<{ castTimes: any[] }> = ({ castTimes }) => (
-  <React.Fragment>
-    <StyledLabel text="cast time" />
-    <p>
-      {castTimes
-        .map(
-          (time: any) =>
-            `${time.number} ${time.unit}${time.condition &&
-              ` (condition: ${time.condition})`}`
-        )
-        .join(", ")}
-    </p>
-  </React.Fragment>
-);
+const CastTime: React.SFC<{ castTimes: any[] }> = ({ castTimes }) => {
+  return (
+    <React.Fragment>
+      <StyledLabel text="cast time" />
+      <div>
+        {castTimes.map((time: any, index: number) => {
+          return (
+            <React.Fragment key={index}>
+              <p>
+                {time.number} {time.unit}
+              </p>
+              {time.condition ? <p>{time.condition}</p> : null}
+            </React.Fragment>
+          );
+        })}
+      </div>
+    </React.Fragment>
+  );
+};
 
 const Level: React.SFC<{ level: number }> = ({ level }) => (
   <React.Fragment>
@@ -54,12 +59,46 @@ const Level: React.SFC<{ level: number }> = ({ level }) => (
   </React.Fragment>
 );
 
-const School: React.SFC<{ school: string }> = ({ school }) => (
-  <React.Fragment>
-    <StyledLabel text="school" />
-    <p>{school}</p>
-  </React.Fragment>
-);
+const School: React.SFC<{ school: string }> = ({ school }) => {
+  let fullSchoolName: string = null;
+  if (school === "T") {
+    fullSchoolName = "Transmutation";
+  }
+  if (school === "A") {
+    fullSchoolName = "Abjuration";
+  }
+  if (school === "C") {
+    fullSchoolName = "Conjuration";
+  }
+  if (school === "D") {
+    fullSchoolName = "Divination";
+  }
+  if (school === "E") {
+    fullSchoolName = "Enchantment";
+  }
+  if (school === "V") {
+    fullSchoolName = "Evocation";
+  }
+  if (school === "I") {
+    fullSchoolName = "Illusion";
+  }
+  if (school === "N") {
+    fullSchoolName = "Necromancy";
+  }
+  if (school === "T") {
+    fullSchoolName = "Transmutation";
+  }
+  if (!fullSchoolName) {
+    throw new Error("Unknown spell school: " + school);
+  }
+
+  return (
+    <React.Fragment>
+      <StyledLabel text="school" />
+      <p>{fullSchoolName}</p>
+    </React.Fragment>
+  );
+};
 
 const Range: React.SFC<{ range: any }> = ({ range }) => (
   <React.Fragment>
