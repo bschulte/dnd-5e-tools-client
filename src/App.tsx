@@ -8,8 +8,7 @@ import { client } from "./graphql/client";
 import DashboardPage from "./pages/DashboardPage";
 import LoginPage from "./pages/LoginPage";
 import AppNavbar from "./components/AppNavbar";
-import { getToken, login, logout } from "./util/auth";
-import { GET_USER } from "./graphql/queries";
+import { getToken, login, logout, getUser } from "./util/auth";
 
 class App extends Component<any, any> {
   componentDidMount = async () => {
@@ -17,8 +16,8 @@ class App extends Component<any, any> {
     // if the stored token is still valid (the user's session is still active)
     const token = getToken();
     if (token) {
-      const { data } = await client.query({ query: GET_USER });
-      if (data) {
+      const user = await getUser();
+      if (user) {
         login(token);
       } else {
         logout();
@@ -35,7 +34,7 @@ class App extends Component<any, any> {
               <AppNavbar />
               <Switch>
                 <Route path="/login" component={LoginPage} />
-                <Route path="/" exact component={DashboardPage} />
+                <Route path="/compendium" component={DashboardPage} />
               </Switch>
             </div>
           </Router>
