@@ -18,3 +18,7 @@ export const login = (token: string) => {
 export const isLoggedIn = () => {
   return loggedIn;
 };
+
+export const getToken = () => {
+  return localStorage.getItem("token");
+};
