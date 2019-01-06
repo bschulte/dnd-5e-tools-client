@@ -8,7 +8,7 @@ export { CardBody } from "./ui/CardBody";
 export { PageContainer } from "./ui/PageContainer";
 export { Input } from "./ui/Input";
 export { Badge } from "./ui/Badge";
-export { HR } from "./ui/HR";
+export { Divider } from "./ui/Divider";
 export { Button } from "./ui/Button";
 export { Alert } from "./ui/Alert";
 export { List } from "./ui/List";
@@ -19,6 +19,8 @@ export { TableBody } from "./ui/Table/TableBody";
 export { TableHeader } from "./ui/Table/TableHeader";
 export { TableRow } from "./ui/Table/TableRow";
 export { TableCell } from "./ui/Table/TableCell";
+export { Navbar } from "./ui/Navbar";
+export { NavItem } from "./ui/NavItem";
 
 export { GraphqlQuery } from "./util/Query";
 

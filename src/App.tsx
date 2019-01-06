@@ -7,6 +7,8 @@ import { client } from "./graphql/client";
 
 import DashboardPage from "./pages/DashboardPage";
 import LoginPage from "./pages/LoginPage";
+import { Navbar } from "./components/core";
+import AppNavbar from "./components/AppNavbar";
 
 class App extends Component<any, any> {
   render() {
@@ -14,10 +16,13 @@ class App extends Component<any, any> {
       <div className="animated fadeIn">
         <ApolloProvider client={client}>
           <Router history={history}>
-            <Switch>
-              <Route path="/login" component={LoginPage} />
-              <Route path="/" exact component={DashboardPage} />
-            </Switch>
+            <div>
+              <AppNavbar />
+              <Switch>
+                <Route path="/login" component={LoginPage} />
+                <Route path="/" exact component={DashboardPage} />
+              </Switch>
+            </div>
           </Router>
         </ApolloProvider>
       </div>

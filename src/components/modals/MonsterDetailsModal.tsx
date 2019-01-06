@@ -4,7 +4,7 @@ import {
   Modal,
   Row,
   Col,
-  HR,
+  Divider,
   Table,
   TableBody,
   TableHead,
@@ -106,7 +106,7 @@ const Listing: React.SFC<{ list: any[]; title: string }> = ({
 
   return (
     <React.Fragment>
-      <HR />
+      <Divider />
       <h3 className="mt-2">{title}</h3>
       {list.map((item, index) => (
         <div className="mt-3" key={index}>
@@ -161,7 +161,7 @@ export default class MonsterDetailsModal extends React.Component<
                   </Col>
                 </Row>
 
-                <HR />
+                <Divider />
 
                 <Row>
                   <Col sm={3}>

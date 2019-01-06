@@ -1,10 +1,19 @@
+# Main Items
 ✔ Spell details modal @done(19-01-05 01:04)
 ✔ Monster details modal @done(19-01-05 17:35)
 ✔ Item details modal @done(19-01-05 17:53)
+☐ Build toasts
 ☐ Character tracker
 ☐ Encounter builder
 ☐ Player view of encounter
 
+
+# Small improvements
+☐ Create class colors for class badges in spell details modal
+☐ Filtering for spells table
+☐ Add additional font weights (probably just have to change google font link)
+☐ Refactor core components to be React SFC's instead of class components
+
 # Bugs
 ☐ 401 error is not being caught by Apollo client
-☐ Fix null values in database being shown as strings
+✔ Fix null values in database being shown as strings @done(19-01-05 21:27)

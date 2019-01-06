@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Label, Modal, Badge, Row, Col, HR } from "../core";
+import { Label, Modal, Badge, Row, Col, Divider } from "../core";
 import { Query } from "react-apollo";
 import { GET_ITEM_DETAILS } from "../../graphql/queries";
 
@@ -63,7 +63,7 @@ export default class ItemDetailsModal extends React.Component<
                   </Col>
                 </Row>
 
-                <HR />
+                <Divider />
 
                 <Row>
                   <Col auto>
@@ -103,7 +103,7 @@ export default class ItemDetailsModal extends React.Component<
                   )}
                 </Row>
 
-                <HR />
+                <Divider />
                 <Row>
                   <Entries entries={item.entries} />
                 </Row>

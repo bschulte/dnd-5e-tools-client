@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Query } from "react-apollo";
 
-import { Modal, Row, Col, Label, HR, Badge } from "../core";
+import { Modal, Row, Col, Label, Divider, Badge } from "../core";
 import { GET_SPELL_DETAILS } from "../../graphql/queries";
 import ClassBadge from "../ClassBadge";
 
@@ -195,7 +195,7 @@ export default class SpellDetailsModal extends React.Component<
                   </Col>
                 </Row>
 
-                <HR />
+                <Divider />
 
                 <Row>
                   <Col auto>
