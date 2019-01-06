@@ -87,12 +87,12 @@ const Skills: React.SFC<{ skills: string }> = ({ skills }) => {
   if (!skills) return null;
 
   return (
-    <React.Fragment>
+    <Col auto>
       <StyledLabel text="skills" />
       {skills.split(",").map(skill => (
         <p className="text-sm capitalize">{skill}</p>
       ))}
-    </React.Fragment>
+    </Col>
   );
 };
 
@@ -125,10 +125,10 @@ const OptionalField: React.SFC<{ title: string; value: string }> = ({
   if (!value) return null;
 
   return (
-    <React.Fragment>
+    <Col auto>
       <StyledLabel text={title} />
       <p className="capitalize">{value}</p>
-    </React.Fragment>
+    </Col>
   );
 };
 
@@ -212,28 +212,15 @@ export default class MonsterDetailsModal extends React.Component<
                 </Row>
 
                 <Row>
-                  <Col auto>
-                    <Skills skills={monster.skills} />
-                  </Col>
+                  <Skills skills={monster.skills} />
 
-                  <Col auto>
-                    <OptionalField title="immune" value={monster.immune} />
-                  </Col>
+                  <OptionalField title="immune" value={monster.immune} />
 
-                  <Col auto>
-                    <OptionalField title="senses" value={monster.senses} />
-                  </Col>
+                  <OptionalField title="senses" value={monster.senses} />
 
-                  <Col auto>
-                    <OptionalField
-                      title="languages"
-                      value={monster.languages}
-                    />
-                  </Col>
+                  <OptionalField title="languages" value={monster.languages} />
 
-                  <Col auto>
-                    <OptionalField title="spells" value={monster.spells} />
-                  </Col>
+                  <OptionalField title="spells" value={monster.spells} />
                 </Row>
 
                 <Listing list={monster.traits} title="Traits" />

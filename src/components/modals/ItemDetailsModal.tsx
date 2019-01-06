@@ -30,7 +30,6 @@ const Entries: React.SFC<{ entries: string[] }> = ({ entries }) => {
 
   return (
     <div>
-      <HR />
       {entries.map((entry, index) => (
         <p key={index} className="my-3">
           {entry}
@@ -88,6 +87,23 @@ export default class ItemDetailsModal extends React.Component<
                   </Col>
                 </Row>
 
+                <Row>
+                  {item.resist && (
+                    <Col auto>
+                      <StyledLabel text="Resistance" />
+                      <p className="capitalize">{item.resist}</p>
+                    </Col>
+                  )}
+
+                  {item.ac !== 0 && (
+                    <Col auto>
+                      <StyledLabel text="AC Granted" />
+                      <p>{item.ac}</p>
+                    </Col>
+                  )}
+                </Row>
+
+                <HR />
                 <Row>
                   <Entries entries={item.entries} />
                 </Row>

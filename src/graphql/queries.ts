@@ -128,6 +128,7 @@ export const GET_ITEM_DETAILS = gql`
       source
       page
       entries
+      resist
     }
   }
 `;
