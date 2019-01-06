@@ -1,13 +1,13 @@
 import ApolloClient, { InMemoryCache } from "apollo-boost";
 import { ApolloCache } from "apollo-cache";
 
-import { logout } from "../util/auth";
+import { logout, getToken } from "../util/auth";
 
 export const client = new ApolloClient({
   uri: "http://localhost:4000/graphql",
 
   request: async operation => {
-    const token = localStorage.getItem("token");
+    const token = getToken();
     if (token) {
       operation.setContext({
         headers: {
