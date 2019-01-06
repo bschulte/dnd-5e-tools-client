@@ -140,12 +140,10 @@ export default class GlobalSearch extends React.Component<
               <Badge
                 className="float-right"
                 color={
-                  item.key === activeItem.key
-                    ? "grey"
-                    : item.type === "Spell"
+                  item.type === "Spell"
                     ? "teal"
                     : item.type === "Monster"
-                    ? "green"
+                    ? "purple"
                     : "pink"
                 }
               >
