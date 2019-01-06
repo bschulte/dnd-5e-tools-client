@@ -24,7 +24,7 @@ export class CardHeader extends React.Component<ICardHeader, any> {
     return (
       <div
         className={classNames(
-          "font-bold p-3 border-t-4 font-roboto-condensed",
+          "font-bold p-3 border-t-4 font-roboto-condensed rounded",
           {
             "border-grey": accentColor === "grey",
             "border-red": accentColor === "red",

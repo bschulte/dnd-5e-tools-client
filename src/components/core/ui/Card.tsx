@@ -14,7 +14,7 @@ export class Card extends React.Component<
     const { children, className, ...other } = this.props;
     return (
       <div
-        className={classNames(className, "shadow-md bg-grey-darkest")}
+        className={classNames(className, "shadow-md bg-grey-darkest rounded")}
         {...other}
       >
         {children}
