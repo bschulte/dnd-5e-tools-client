@@ -3,6 +3,7 @@ import { Mutation } from "react-apollo";
 
 import { Card, CardBody, Input, Button, Alert } from "../components/core";
 import { LOGIN } from "../graphql/mutations";
+import { login } from "../util/auth";
 
 export default class LoginPage extends React.Component<
   any,
@@ -14,8 +15,7 @@ export default class LoginPage extends React.Component<
   };
 
   handleLoginSuccess = (data: any) => {
-    localStorage.setItem("token", data.login);
-    this.props.history.push("/");
+    login(data.login);
   };
 
   public render() {
