@@ -11,6 +11,8 @@ export const NavItem: React.SFC<INavItemProps> = ({ to, children }) => {
     <NavLink
       to={to}
       className="flex text-grey-light hover:text-primary mr-4 text-sm no-underline"
+      activeClassName="border-b-2 border-primary"
+      style={{ transition: "all 0.3s ease" }}
     >
       {children}
     </NavLink>

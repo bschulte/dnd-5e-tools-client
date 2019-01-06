@@ -2,7 +2,6 @@ import * as React from "react";
 import { DataTable } from "../core";
 import { RowInfo } from "react-table";
 import { client } from "../../graphql/client";
-import { SHOW_DETAILS_MODAL } from "../../graphql/localState/localMutations";
 
 interface ISpellsTableProps {
   spells: any[];
@@ -10,9 +9,15 @@ interface ISpellsTableProps {
 
 export class SpellsTable extends React.Component<ISpellsTableProps, any> {
   openSpellModal = (row: RowInfo) => {
-    client.mutate({
-      mutation: SHOW_DETAILS_MODAL,
-      variables: { type: "Spell", databaseId: row.original.id }
+    client.writeData({
+      data: {
+        detailsModal: {
+          __typename: "DetailsModalData",
+          databaseId: row.original.id,
+          type: "Spell",
+          isOpen: true
+        }
+      }
     });
   };
 

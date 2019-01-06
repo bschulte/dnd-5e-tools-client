@@ -1,7 +1,6 @@
 import * as React from "react";
 import { DataTable } from "../core";
 import { RowInfo } from "react-table";
-import { SHOW_DETAILS_MODAL } from "../../graphql/localState/localMutations";
 import { client } from "../../graphql/client";
 
 export interface IItemsTableProps {
@@ -10,9 +9,15 @@ export interface IItemsTableProps {
 
 export default class ItemsTable extends React.Component<IItemsTableProps, any> {
   openItemModal = (row: RowInfo) => {
-    client.mutate({
-      mutation: SHOW_DETAILS_MODAL,
-      variables: { type: "Item", databaseId: row.original.id }
+    client.writeData({
+      data: {
+        detailsModal: {
+          __typename: "DetailsModalData",
+          databaseId: row.original.id,
+          type: "Item",
+          isOpen: true
+        }
+      }
     });
   };
 

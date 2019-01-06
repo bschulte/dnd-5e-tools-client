@@ -3,7 +3,6 @@ import * as React from "react";
 import { RowInfo, Column } from "react-table";
 import { client } from "../../graphql/client";
 import { DataTable } from "../core";
-import { SHOW_DETAILS_MODAL } from "../../graphql/localState/localMutations";
 
 export interface IMonstersTableProps {
   monsters: any[];
@@ -14,9 +13,15 @@ export default class MonstersTable extends React.Component<
   any
 > {
   openMonsterModal = (row: RowInfo) => {
-    client.mutate({
-      mutation: SHOW_DETAILS_MODAL,
-      variables: { type: "Monster", databaseId: row.original.id }
+    client.writeData({
+      data: {
+        detailsModal: {
+          __typename: "DetailsModalData",
+          databaseId: row.original.id,
+          type: "Monster",
+          isOpen: true
+        }
+      }
     });
   };
 

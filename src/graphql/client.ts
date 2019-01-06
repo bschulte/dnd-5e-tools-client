@@ -42,46 +42,10 @@ export const client = new ApolloClient({
         databaseId: null
       },
       // Flag to track globally if there is a modal open or not
-      modalOpen: false
+      modalOpen: false,
+      userData: false
     },
 
-    resolvers: {
-      Mutation: {
-        hideDetailsModal: (
-          _: any,
-          _args: any,
-          { cache }: { cache: ApolloCache<InMemoryCache> }
-        ): void => {
-          const data = {
-            detailsModal: {
-              __typename: "DetailsModalData",
-              isOpen: false
-            },
-            modalOpen: false
-          };
-
-          cache.writeData({ data });
-          return null;
-        },
-
-        showDetailsModal: (
-          _: any,
-          { databaseId, type }: any,
-          { cache }: { cache: ApolloCache<InMemoryCache> }
-        ): void => {
-          const data = {
-            detailsModal: {
-              __typename: "DetailsModalData",
-              databaseId,
-              type,
-              isOpen: true
-            },
-            modalOpen: true
-          };
-          cache.writeData({ data });
-          return null;
-        }
-      }
-    }
+    resolvers: {}
   }
 });

@@ -2,7 +2,6 @@ import * as React from "react";
 
 import { client } from "../../graphql/client";
 import { Modal } from "../core";
-import { HIDE_DETAILS_MODAL } from "../../graphql/localState/localMutations";
 import SpellDetailsModal from "../modals/SpellDetailsModal";
 import MonsterDetailsModal from "../modals/MonsterDetailsModal";
 import ItemDetailsModal from "../modals/ItemDetailsModal";
@@ -18,7 +17,14 @@ export default class DetailsModal extends React.Component<
   any
 > {
   closeModal = () => {
-    client.mutate({ mutation: HIDE_DETAILS_MODAL });
+    client.writeData({
+      data: {
+        detailsModal: {
+          __typename: "DetailsModalData",
+          isOpen: false
+        }
+      }
+    });
   };
 
   public render() {

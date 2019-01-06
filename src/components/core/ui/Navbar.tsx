@@ -17,7 +17,7 @@ export const Navbar: React.SFC<INavbarProps> = ({
     <nav
       className={classNames(
         "flex items-center justify-between",
-        "flex-wrap bg-grey-darkest p-4",
+        "flex-wrap bg-grey-darkest p-2",
         "border-primary border-t-4 shadow-md",
         className
       )}

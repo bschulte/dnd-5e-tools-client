@@ -4,7 +4,6 @@ import Fuse from "fuse.js";
 import { client } from "../../graphql/client";
 import { Modal, Input, List, HotKey, Badge } from "../core";
 import { ListItem } from "../core/ui/ListItem";
-import { SHOW_DETAILS_MODAL } from "../../graphql/localState/localMutations";
 
 interface IGlobalSearchProps {
   items: any[];
@@ -74,10 +73,17 @@ export default class GlobalSearch extends React.Component<
     const { toggle } = this.props;
     if (e.key === "Enter") {
       console.log("Selecting active element:", activeItem);
-      client.mutate({
-        mutation: SHOW_DETAILS_MODAL,
-        variables: { type: activeItem.type, databaseId: activeItem.id }
+      client.writeData({
+        data: {
+          detailsModal: {
+            __typename: "DetailsModalData",
+            databaseId: activeItem.id,
+            type: activeItem.type,
+            isOpen: true
+          }
+        }
       });
+
       toggle();
     }
   };
