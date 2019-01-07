@@ -1,14 +1,6 @@
 import * as React from "react";
 
-import {
-  Row,
-  Col,
-  Card,
-  CardBody,
-  CardHeader,
-  HotKey,
-  GraphqlQuery
-} from "../core";
+import { Row, Col, Card, CardBody, CardHeader, HotKey } from "../core";
 import { SpellsTable } from "./SpellsTable";
 import MonstersTable from "./MonstersTable";
 import GlobalSearch from "./GlobalSearch";

@@ -7,20 +7,31 @@ export interface IButtonProps {
   children: React.ReactNode;
   className?: string;
   loading?: boolean;
+  icon?: boolean;
 }
 
 export function Button(
   props: IButtonProps & React.HTMLProps<HTMLButtonElement>
 ) {
-  const { children, primary, className, block, loading, ...other } = props;
+  const {
+    children,
+    primary,
+    className,
+    block,
+    loading,
+    icon,
+    ...other
+  } = props;
   return (
     <button
       className={classNames(
         className,
-        "font-semibold py-2 px-4 border",
+        "font-semibold border",
         "rounded shadow text-grey-light",
         "focus:outline-none",
         {
+          "py-2 px-4": !icon,
+          "h-8 w-8 rounded-full flex items-center justify-center": icon,
           "w-full": block,
           "bg-primary hover:bg-primary-darker focus:bg-primary-darker border-primary-darker": primary
         }

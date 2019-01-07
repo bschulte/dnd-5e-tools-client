@@ -16,15 +16,20 @@ export interface ICardHeader {
     | "purple"
     | "pink"
     | "white";
+  rightComp?: any;
 }
 
 export class CardHeader extends React.Component<ICardHeader, any> {
   public render() {
-    const { title, accentColor = "black" } = this.props;
+    const {
+      title,
+      accentColor = "black",
+      rightComp: Right = null
+    } = this.props;
     return (
       <div
         className={classNames(
-          "font-bold p-3 border-t-4 font-roboto-condensed rounded",
+          "font-bold p-3 border-t-4 font-roboto-condensed rounded flex justify-between",
           {
             "border-grey": accentColor === "grey",
             "border-red": accentColor === "red",
@@ -41,7 +46,8 @@ export class CardHeader extends React.Component<ICardHeader, any> {
           }
         )}
       >
-        {title}
+        <span className="flex items-center">{title}</span>
+        {Right && <Right />}
       </div>
     );
   }

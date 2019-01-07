@@ -11,9 +11,11 @@ export class GraphqlQuery extends React.Component<IQueryProps, any> {
     const { component: Component, query } = this.props;
     return (
       <Query query={query}>
-        {({ data, loading, refetch }) => (
-          <Component data={data} refetch={refetch} />
-        )}
+        {({ data, loading, refetch }) => {
+          if (loading) return "loading...";
+
+          return <Component data={data} refetch={refetch} />;
+        }}
       </Query>
     );
   }

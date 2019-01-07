@@ -140,3 +140,19 @@ export const GET_ITEM_DETAILS = gql`
     }
   }
 `;
+
+export const GET_CHARACTERS = gql`
+  {
+    characters {
+      id
+      name
+      active
+      spellbook {
+        name
+        spells {
+          name
+        }
+      }
+    }
+  }
+`;

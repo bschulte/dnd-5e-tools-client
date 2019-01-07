@@ -24,7 +24,9 @@ export default class AppNavbar extends React.Component<IAppNavbarProps, any> {
                 <NavItem to="/characters">Characters</NavItem>
               </div>
               <div className="flex">
-                <span className="mr-3 text-sm">{data.userData.email}</span>
+                <span className="mr-3 text-sm">
+                  {data.userData && data.userData.email}
+                </span>
                 <i
                   className="far fa-sign-out text-xl cursor-pointer"
                   onClick={() => logout()}

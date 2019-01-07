@@ -12,3 +12,19 @@ export const LOGIN = gql`
     login(userData: $userData)
   }
 `;
+
+export const UPDATE_CHARACTER = gql`
+  mutation updateCharacter(
+    $characterId: Float!
+    $characterData: CharacterInput!
+  ) {
+    updateCharacter(
+      characterId: $characterId
+      newCharacterData: $characterData
+    ) {
+      id
+      name
+      active
+    }
+  }
+`;

@@ -1,5 +1,4 @@
-import ApolloClient, { InMemoryCache } from "apollo-boost";
-import { ApolloCache } from "apollo-cache";
+import ApolloClient from "apollo-boost";
 
 import { logout, getToken } from "../util/auth";
 
@@ -28,8 +27,10 @@ export const client = new ApolloClient({
       });
     }
     if (networkError) {
-      console.log("Caught network error:", networkError);
-      logout();
+      console.log("Caught network error:", networkError.statusCode);
+      if (networkError.statusCode === 401) {
+        logout();
+      }
     }
   },
 

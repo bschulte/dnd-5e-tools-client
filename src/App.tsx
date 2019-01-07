@@ -9,6 +9,7 @@ import DashboardPage from "./pages/DashboardPage";
 import LoginPage from "./pages/LoginPage";
 import AppNavbar from "./components/AppNavbar";
 import { getToken, login, logout, getUser } from "./util/auth";
+import CharactersPage from "./pages/CharactersPage";
 
 class App extends Component<any, any> {
   componentDidMount = async () => {
@@ -35,6 +36,7 @@ class App extends Component<any, any> {
               <Switch>
                 <Route path="/login" component={LoginPage} />
                 <Route path="/compendium" component={DashboardPage} />
+                <Route path="/characters" component={CharactersPage} />
               </Switch>
             </div>
           </Router>

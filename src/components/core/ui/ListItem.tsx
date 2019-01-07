@@ -5,7 +5,10 @@ export interface IListItemProps {
   active?: boolean;
 }
 
-export class ListItem extends React.Component<IListItemProps, any> {
+export class ListItem extends React.Component<
+  IListItemProps & React.HTMLProps<HTMLLIElement>,
+  any
+> {
   public render() {
     const { children, active, ...otherProps } = this.props;
     return (
