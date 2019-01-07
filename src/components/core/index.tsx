@@ -12,6 +12,7 @@ export { Divider } from "./ui/Divider";
 export { Button } from "./ui/Button";
 export { Alert } from "./ui/Alert";
 export { List } from "./ui/List";
+export { ListItem } from "./ui/ListItem";
 export { Label } from "./ui/Label";
 export { Table } from "./ui/Table/Table";
 export { TableHead } from "./ui/Table/TableHead";

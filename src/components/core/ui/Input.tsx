@@ -6,6 +6,7 @@ interface IInputProps {
   icon?: string;
   backgroundColor?: "light" | "dark";
   label?: string;
+  labelSize?: "xs" | "sm" | "md" | "lg";
   block?: boolean;
   inputClassName?: string;
   focusOnMount?: boolean;
@@ -39,6 +40,7 @@ export class Input extends React.Component<
       block,
       label,
       focusOnMount,
+      labelSize = "md",
       ...otherProps
     } = this.props;
     return (
@@ -47,7 +49,7 @@ export class Input extends React.Component<
           "w-full": block
         })}
       >
-        {label && <Label text={label} />}
+        {label && <Label text={label} size={labelSize} />}
         {icon && (
           <i
             className={classNames(icon, "absolute ml-3")}
