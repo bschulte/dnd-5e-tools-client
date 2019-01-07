@@ -11,7 +11,7 @@ export const logout = () => {
   history.push("/login");
 };
 
-export const login = (token: string) => {
+export const login = (token: string, redirect: boolean = false) => {
   localStorage.setItem("token", token);
   loggedIn = true;
   history.push("/compendium");
