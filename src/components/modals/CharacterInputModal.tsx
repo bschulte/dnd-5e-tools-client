@@ -6,6 +6,7 @@ import { Modal, Row, Col, Input, Divider, Label, Button } from "../core";
 import { ValueType } from "react-select/lib/types";
 import { client } from "../../graphql/client";
 import { CREATE_CHARACTER } from "../../graphql/mutations";
+import { GET_CHARACTERS } from "../../graphql/queries";
 
 interface ICharacterInputModalProps {
   mode: "new" | "edit";
@@ -73,7 +74,9 @@ export default class CharacterInputModal extends React.Component<
           wis: parseInt(wis.value, 10),
           cha: parseInt(cha.value, 10)
         }
-      }
+      },
+      refetchQueries: [{ query: GET_CHARACTERS }],
+      awaitRefetchQueries: true
     });
 
     toggle();

@@ -5,6 +5,7 @@ import { UPDATE_CHARACTER } from "../../graphql/mutations";
 import CharacterInputModal from "../modals/CharacterInputModal";
 import { CharacterList } from "./CharacterList";
 import { GET_CHARACTERS } from "../../graphql/queries";
+import CharacterTracker from "./CharacterTracker";
 
 interface ICharactersProps {
   data: any;
@@ -26,7 +27,7 @@ export default class Characters extends React.Component<
     await client.mutate({
       mutation: UPDATE_CHARACTER,
       variables: { characterId, characterData: { active: true } },
-      refetchQueries: [GET_CHARACTERS],
+      refetchQueries: [{ query: GET_CHARACTERS }],
       awaitRefetchQueries: true
     });
   };
@@ -35,7 +36,8 @@ export default class Characters extends React.Component<
     const { data } = this.props;
     const { showNewCharacterModal } = this.state;
 
-    console.log("data", data);
+    const activeChar = data.characters.find((char: any) => char.active);
+
     return (
       <div>
         <CharacterInputModal
@@ -56,6 +58,10 @@ export default class Characters extends React.Component<
               }
               setActiveCharacter={this.setActiveCharacter}
             />
+          </Col>
+
+          <Col sm={4}>
+            <CharacterTracker activeCharId={activeChar.id} />
           </Col>
         </Row>
       </div>

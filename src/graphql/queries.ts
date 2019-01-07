@@ -147,10 +147,30 @@ export const GET_CHARACTERS = gql`
       id
       name
       active
+    }
+  }
+`;
+
+export const GET_CHARACTER = gql`
+  query character($id: Float!) {
+    character(id: $id) {
+      id
+      name
+      level
+      className
+      str
+      dex
+      con
+      int
+      wis
+      cha
       spellbook {
+        id
         name
         spells {
+          id
           name
+          level
         }
       }
     }
