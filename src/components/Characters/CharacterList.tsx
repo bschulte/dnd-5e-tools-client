@@ -28,8 +28,9 @@ export const CharacterList: React.SFC<ICharacterListProps> = ({
           {characters.map((character: any, index: number) => (
             <ListItem
               key={index}
-              onClick={setActiveCharacter}
+              onClick={() => setActiveCharacter(character.id)}
               active={character.active}
+              className="cursor-pointer"
             >
               {character.name}
             </ListItem>

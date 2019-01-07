@@ -22,19 +22,29 @@ export function Button(
     icon,
     ...other
   } = props;
+
+  let colorProps = "";
+  if (primary) {
+    colorProps =
+      "bg-primary hover:bg-primary-darker focus:bg-primary-darker border-primary-darker text-grey-light";
+  } else {
+    colorProps =
+      "bg-grey hover:bg-grey-dark focus:bg-grey-dark border-grey-dark text-grey-darkest";
+  }
+
   return (
     <button
       className={classNames(
         className,
         "font-semibold border",
-        "rounded shadow text-grey-light",
+        "rounded shadow ",
         "focus:outline-none",
         {
           "py-2 px-4": !icon,
           "h-8 w-8 rounded-full flex items-center justify-center": icon,
-          "w-full": block,
-          "bg-primary hover:bg-primary-darker focus:bg-primary-darker border-primary-darker": primary
-        }
+          "w-full": block
+        },
+        colorProps
       )}
       {...other}
       style={{

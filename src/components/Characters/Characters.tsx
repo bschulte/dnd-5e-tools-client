@@ -4,6 +4,7 @@ import { client } from "../../graphql/client";
 import { UPDATE_CHARACTER } from "../../graphql/mutations";
 import CharacterInputModal from "../modals/CharacterInputModal";
 import { CharacterList } from "./CharacterList";
+import { GET_CHARACTERS } from "../../graphql/queries";
 
 interface ICharactersProps {
   data: any;
@@ -24,7 +25,9 @@ export default class Characters extends React.Component<
   setActiveCharacter = async (characterId: number) => {
     await client.mutate({
       mutation: UPDATE_CHARACTER,
-      variables: { characterId, characterData: { active: true } }
+      variables: { characterId, characterData: { active: true } },
+      refetchQueries: [GET_CHARACTERS],
+      awaitRefetchQueries: true
     });
   };
 

@@ -21,6 +21,7 @@ export default class AppNavbar extends React.Component<IAppNavbarProps, any> {
             <Navbar title="DnD 5e Tools" brandImg={dragonIcon}>
               <div className="flex">
                 <NavItem to="/compendium">Compendium</NavItem>
+                <NavItem to="/spellbooks">Spell Books</NavItem>
                 <NavItem to="/characters">Characters</NavItem>
               </div>
               <div className="flex">

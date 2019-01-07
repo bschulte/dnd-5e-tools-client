@@ -10,12 +10,16 @@ export class ListItem extends React.Component<
   any
 > {
   public render() {
-    const { children, active, ...otherProps } = this.props;
+    const { children, active, className, ...otherProps } = this.props;
     return (
       <li
-        className={classNames("px-2 py-4 border-b", {
-          "bg-primary": active
-        })}
+        className={classNames(
+          "px-2 py-4 border-b",
+          {
+            "bg-primary": active
+          },
+          className
+        )}
         style={{
           transition: "all 0.3s ease"
         }}

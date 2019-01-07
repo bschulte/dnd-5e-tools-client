@@ -156,3 +156,17 @@ export const GET_CHARACTERS = gql`
     }
   }
 `;
+
+export const GET_SPELLBOOKS = gql`
+  {
+    spellbooks {
+      id
+      name
+      spells {
+        id
+        name
+        level
+      }
+    }
+  }
+`;

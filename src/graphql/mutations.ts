@@ -28,3 +28,13 @@ export const UPDATE_CHARACTER = gql`
     }
   }
 `;
+
+export const CREATE_CHARACTER = gql`
+  mutation createCharacter($characterData: CharacterInput!) {
+    createCharacter(newCharacterData: $characterData) {
+      id
+      name
+      active
+    }
+  }
+`;
