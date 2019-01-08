@@ -8,6 +8,7 @@ interface IDropdownSearchProps {
   items: any[];
   numItemsToShow?: number;
   filterKeys: string[];
+  focusOnMount?: boolean;
   onActiveItemSelect: (activeItem: any) => void;
   renderItemRow: (item: any, activeItem: any) => React.ReactNode;
 }
@@ -104,7 +105,7 @@ export class DropdownSearch extends React.Component<
   };
 
   public render() {
-    const { numItemsToShow, renderItemRow } = this.props;
+    const { numItemsToShow, renderItemRow, focusOnMount = false } = this.props;
     const {
       searchStr,
       searchInputFocused,
@@ -126,7 +127,7 @@ export class DropdownSearch extends React.Component<
           onFocus={() => this.setState({ searchInputFocused: true })}
           onBlur={() => this.setState({ searchInputFocused: false })}
           block
-          focusOnMount
+          focusOnMount={focusOnMount}
           value={searchStr}
           onChange={e => this.handleSearchStrChange(e.currentTarget.value)}
           onKeyPress={e => this.handleInputKeyPress(e)}
