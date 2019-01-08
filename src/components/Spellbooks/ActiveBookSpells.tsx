@@ -2,6 +2,7 @@ import * as React from "react";
 import { Query } from "react-apollo";
 import { GET_SPELLBOOK } from "../../graphql/queries";
 import { Card, CardHeader, CardBody, List, ListItem, Badge } from "../core";
+import { showDetailsModal } from "../../graphql/shared";
 
 export interface IActiveBookSpellsProps {
   activeBookId: number;
@@ -36,7 +37,10 @@ export default class ActiveBookSpells extends React.Component<
               <CardBody>
                 <List style={{ maxHeight: 600 }} className="overflow-auto">
                   {sortedSpells.map((spell: any, index: number) => (
-                    <ListItem key={index}>
+                    <ListItem
+                      key={index}
+                      onClick={() => showDetailsModal(spell.id, "Spell")}
+                    >
                       <span>{spell.name}</span>
                       <Badge color="teal" className="float-right">
                         Level {spell.level}

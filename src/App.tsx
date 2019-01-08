@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Router, Route, Switch } from "react-router-dom";
-import { ApolloProvider } from "react-apollo";
+import { ApolloProvider, Query } from "react-apollo";
 import { history } from "./history";
 
 import { client } from "./graphql/client";
@@ -11,6 +11,9 @@ import AppNavbar from "./components/AppNavbar";
 import { getToken, login, logout, getUser } from "./util/auth";
 import CharactersPage from "./pages/CharactersPage";
 import SpellbooksPage from "./pages/SpellbooksPage";
+import GlobalSearch from "./components/Dashboard/GlobalSearch";
+import { GET_DETAILS_MODAL } from "./graphql/localState/localQueries";
+import DetailsModal from "./components/Dashboard/DetailsModal";
 
 class App extends Component<any, any> {
   componentDidMount = async () => {
@@ -33,6 +36,19 @@ class App extends Component<any, any> {
         <ApolloProvider client={client}>
           <Router history={history}>
             <div>
+              <GlobalSearch />
+              <Query query={GET_DETAILS_MODAL}>
+                {({ data }) => {
+                  const { isOpen, databaseId, type } = data.detailsModal;
+                  return (
+                    <DetailsModal
+                      isOpen={isOpen}
+                      type={type}
+                      databaseId={databaseId}
+                    />
+                  );
+                }}
+              </Query>
               <AppNavbar />
               <Switch>
                 <Route path="/login" component={LoginPage} />

@@ -1,14 +1,13 @@
 import * as React from "react";
 
-import { client } from "../../graphql/client";
-import { Modal, Badge, DropdownSearch } from "../core";
+import { Modal, Badge, DropdownSearch, HotKey } from "../core";
 import { ListItem } from "../core/ui/ListItem";
+import { showDetailsModal } from "../../graphql/shared";
+import { DASHBOARD_QUERY } from "../../graphql/queries";
+import { Query } from "react-apollo";
+import { IS_MODAL_OPEN } from "../../graphql/localState/localQueries";
 
-interface IGlobalSearchProps {
-  showOmnibar: boolean;
-  toggle: () => void;
-  items: any[];
-}
+interface IGlobalSearchProps {}
 
 interface IGlobalSearchState {}
 
@@ -16,51 +15,95 @@ export default class GlobalSearch extends React.Component<
   IGlobalSearchProps,
   IGlobalSearchState
 > {
-  handleActiveItemSelect = (activeItem: any) => {
-    const { toggle } = this.props;
-    client.writeData({
-      data: {
-        detailsModal: {
-          __typename: "DetailsModalData",
-          databaseId: activeItem.id,
-          type: activeItem.type,
-          isOpen: true
-        }
-      }
-    });
+  state = {
+    showOmnibar: false
+  };
 
-    toggle();
+  toggle = () => {
+    const { showOmnibar } = this.state;
+    this.setState({ showOmnibar: !showOmnibar });
+  };
+
+  generateOmnibarItems = (data: any) => {
+    if (!("spells" in data) || !("monsters" in data) || !("items" in data)) {
+      return [];
+    }
+
+    const spells = data.spells.map((spell: any) => ({
+      id: spell.id,
+      name: spell.name,
+      type: "Spell"
+    }));
+    const monsters = data.monsters.map((monster: any) => ({
+      id: monster.id,
+      name: monster.name,
+      type: "Monster"
+    }));
+    const items = data.items.map((item: any) => ({
+      id: item.id,
+      name: item.name,
+      type: "Item"
+    }));
+
+    return []
+      .concat(spells, monsters, items)
+      .map((item, index: number) => ({ ...item, key: index }));
+  };
+
+  handleActiveItemSelect = (activeItem: any) => {
+    showDetailsModal(activeItem.id, activeItem.type);
+
+    this.toggle();
   };
 
   public render() {
-    const { showOmnibar, toggle, items } = this.props;
+    const { showOmnibar } = this.state;
+    console.log("Rendering global search, showOmnibar:", showOmnibar);
 
     return (
-      <Modal isOpen={showOmnibar} toggle={toggle}>
-        <DropdownSearch
-          items={items}
-          onActiveItemSelect={this.handleActiveItemSelect}
-          focusOnMount
-          renderItemRow={(item: any, activeItem: any) => (
-            <ListItem key={item.key} active={activeItem.key === item.key}>
-              <span>{item.name}</span>
-              <Badge
-                className="float-right"
-                color={
-                  item.type === "Spell"
-                    ? "teal"
-                    : item.type === "Monster"
-                    ? "purple"
-                    : "pink"
-                }
-              >
-                {item.type}
-              </Badge>
-            </ListItem>
+      <div>
+        <Query query={IS_MODAL_OPEN}>
+          {({ data }) => (
+            <React.Fragment>
+              {!data.modalOpen && (
+                <HotKey hotkey="s" shift onTrigger={this.toggle} />
+              )}
+            </React.Fragment>
           )}
-          filterKeys={["type", "name"]}
-        />
-      </Modal>
+        </Query>
+        <Modal isOpen={showOmnibar} toggle={this.toggle}>
+          <Query query={DASHBOARD_QUERY}>
+            {({ data, loading }) => {
+              if (loading) return "loading...";
+
+              const items = this.generateOmnibarItems(data);
+              <DropdownSearch
+                items={items}
+                onActiveItemSelect={this.handleActiveItemSelect}
+                focusOnMount
+                renderItemRow={(item: any, activeItem: any) => (
+                  <ListItem key={item.key} active={activeItem.key === item.key}>
+                    <span>{item.name}</span>
+                    <Badge
+                      className="float-right"
+                      color={
+                        item.type === "Spell"
+                          ? "teal"
+                          : item.type === "Monster"
+                          ? "purple"
+                          : "pink"
+                      }
+                    >
+                      {item.type}
+                    </Badge>
+                  </ListItem>
+                )}
+                filterKeys={["type", "name"]}
+              />;
+            }}
+          </Query>
+        </Modal>
+      </div>
     );
   }
 }
