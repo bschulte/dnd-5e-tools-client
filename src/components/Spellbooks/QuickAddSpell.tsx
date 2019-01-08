@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Query } from "react-apollo";
-import { GET_SPELL_LIST } from "../../graphql/queries";
+import { GET_SPELL_LIST, GET_SPELLBOOK } from "../../graphql/queries";
 import {
   Card,
   CardHeader,
@@ -9,6 +9,8 @@ import {
   ListItem,
   Badge
 } from "../core";
+import { client } from "../../graphql/client";
+import { TOGGLE_SPELL } from "../../graphql/mutations";
 
 export interface IQuickAddSpellProps {}
 
@@ -16,6 +18,14 @@ export default class QuickAddSpell extends React.Component<
   IQuickAddSpellProps,
   any
 > {
+  toggleSpell = async (spellItem: any) => {
+    await client.mutate({
+      mutation: TOGGLE_SPELL,
+      variables: { spellId: spellItem.id },
+      refetchQueries: [{ query: GET_SPELLBOOK }]
+    });
+  };
+
   public render() {
     return (
       <Query query={GET_SPELL_LIST}>
@@ -27,11 +37,12 @@ export default class QuickAddSpell extends React.Component<
               <CardHeader title="Quick Add Spell" />
               <CardBody>
                 <DropdownSearch
+                  filterKeys={["name"]}
+                  numItemsToShow={5}
                   items={data.spells.map((spell: any, index: any) => ({
                     ...spell,
                     key: index
                   }))}
-                  filterKeys={["name"]}
                   renderItemRow={(item: any, activeItem: any) => (
                     <ListItem
                       key={item.key}
@@ -43,9 +54,8 @@ export default class QuickAddSpell extends React.Component<
                       </Badge>
                     </ListItem>
                   )}
-                  numItemsToShow={5}
                   onActiveItemSelect={(activeItem: any) =>
-                    alert(activeItem.name)
+                    this.toggleSpell(activeItem)
                   }
                 />
               </CardBody>

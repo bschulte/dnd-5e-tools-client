@@ -61,3 +61,17 @@ export const UPDATE_SPELLBOOK = gql`
     }
   }
 `;
+
+export const TOGGLE_SPELL = gql`
+  mutation toggleSpell($spellId: Float!) {
+    toggleSpell(spellId: $spellId) {
+      id
+      name
+      spells {
+        id
+        name
+        level
+      }
+    }
+  }
+`;

@@ -99,7 +99,7 @@ export class DropdownSearch extends React.Component<
     const { activeItem } = this.state;
 
     if (e.key === "Enter") {
-      console.log("Selecting active element:", activeItem);
+      this.handleSearchStrChange("");
       onActiveItemSelect(activeItem);
     }
   };
