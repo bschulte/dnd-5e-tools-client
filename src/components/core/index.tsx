@@ -22,6 +22,7 @@ export { TableRow } from "./ui/Table/TableRow";
 export { TableCell } from "./ui/Table/TableCell";
 export { Navbar } from "./ui/Navbar";
 export { NavItem } from "./ui/NavItem";
+export { DropdownSearch } from "./ui/DropdownSearch";
 
 export { GraphqlQuery } from "./util/Query";
 
