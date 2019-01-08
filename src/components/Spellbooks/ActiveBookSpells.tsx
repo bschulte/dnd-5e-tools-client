@@ -1,11 +1,19 @@
 import * as React from "react";
 import { Query } from "react-apollo";
 import { GET_SPELLBOOK } from "../../graphql/queries";
-import { Card, CardHeader, CardBody } from "../core";
+import { Card, CardHeader, CardBody, List, ListItem, Badge } from "../core";
 
 export interface IActiveBookSpellsProps {
   activeBookId: number;
 }
+
+const sortSpells = (spells: any[]) => {
+  return spells.sort((a, b) => {
+    if (a.level < b.level) return -1;
+    else if (a.level > b.level) return 1;
+    else return 0;
+  });
+};
 
 export default class ActiveBookSpells extends React.Component<
   IActiveBookSpellsProps,
@@ -19,14 +27,23 @@ export default class ActiveBookSpells extends React.Component<
         {({ data, loading }) => {
           if (loading) return "loading...";
 
+          const sortedSpells = sortSpells(data.spellbook.spells);
+
           return (
             <Card>
               <CardHeader title="Active Spellbook" />
 
               <CardBody>
-                {data.spellbook.spells.map((spell: any, index: number) => (
-                  <div key={index}>{spell.name}</div>
-                ))}
+                <List style={{ maxHeight: 600 }} className="overflow-auto">
+                  {sortedSpells.map((spell: any, index: number) => (
+                    <ListItem key={index}>
+                      <span>{spell.name}</span>
+                      <Badge color="teal" className="float-right">
+                        Level {spell.level}
+                      </Badge>
+                    </ListItem>
+                  ))}
+                </List>
               </CardBody>
             </Card>
           );

@@ -1,12 +1,18 @@
 import * as React from "react";
+import classNames from "classnames";
 
-export interface IListProps {}
+export interface IListProps {
+  className?: string;
+}
 
-export class List extends React.Component<IListProps, any> {
+export class List extends React.Component<
+  IListProps & React.HTMLProps<HTMLUListElement>,
+  any
+> {
   public render() {
-    const { children, ...otherProps } = this.props;
+    const { children, className, ...otherProps } = this.props;
     return (
-      <ul className="list-reset mt-2" {...otherProps}>
+      <ul className={classNames("list-reset mt-2", className)} {...otherProps}>
         {children}
       </ul>
     );
