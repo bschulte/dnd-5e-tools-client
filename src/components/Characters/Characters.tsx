@@ -61,7 +61,9 @@ export default class Characters extends React.Component<
           </Col>
 
           <Col sm={4}>
-            <CharacterTracker activeCharId={activeChar.id} />
+            <CharacterTracker
+              activeCharId={activeChar ? activeChar.id : null}
+            />
           </Col>
         </Row>
       </div>

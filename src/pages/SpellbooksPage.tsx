@@ -1,7 +1,7 @@
 import * as React from "react";
 import { PageContainer, GraphqlQuery } from "../components/core";
 import { GET_SPELLBOOKS } from "../graphql/queries";
-import SpellBooks from "../components/Characters/SpellBooks";
+import SpellBooks from "../components/Spellbooks/SpellBooks";
 
 export interface ISpellbooksPageProps {}
 

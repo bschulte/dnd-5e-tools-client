@@ -38,3 +38,26 @@ export const CREATE_CHARACTER = gql`
     }
   }
 `;
+
+export const CREATE_SPELLBOOK = gql`
+  mutation createSpellbook($name: String!) {
+    createSpellbook(name: $name) {
+      id
+      name
+      active
+    }
+  }
+`;
+
+export const UPDATE_SPELLBOOK = gql`
+  mutation updateSpellbook(
+    $bookId: Float!
+    $newSpellbookData: SpellbookInput!
+  ) {
+    updateSpellbook(bookId: $bookId, newSpellbookData: $newSpellbookData) {
+      id
+      name
+      active
+    }
+  }
+`;
