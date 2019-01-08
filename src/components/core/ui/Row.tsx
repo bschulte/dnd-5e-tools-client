@@ -1,8 +1,17 @@
 import * as React from "react";
+import classNames from "classnames";
 
-export class Row extends React.Component<any, any> {
+interface IRowProps {
+  className?: string;
+}
+
+export class Row extends React.Component<IRowProps, any> {
   public render() {
-    const { children } = this.props;
-    return <div className="flex mb-4 flex-wrap">{children}</div>;
+    const { children, className } = this.props;
+    return (
+      <div className={classNames("flex mb-4 flex-wrap", className)}>
+        {children}
+      </div>
+    );
   }
 }

@@ -28,6 +28,16 @@ export const DASHBOARD_QUERY = gql`
   }
 `;
 
+export const GET_SPELL_LIST = gql`
+  {
+    spells {
+      id
+      name
+      level
+    }
+  }
+`;
+
 export const GET_SPELL_DETAILS = gql`
   query spell($id: Float!) {
     spell(id: $id) {

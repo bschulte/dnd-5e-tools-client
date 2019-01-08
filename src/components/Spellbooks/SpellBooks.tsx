@@ -6,6 +6,7 @@ import { client } from "../../graphql/client";
 import { UPDATE_SPELLBOOK } from "../../graphql/mutations";
 import { GET_SPELLBOOKS } from "../../graphql/queries";
 import ActiveBookSpells from "./ActiveBookSpells";
+import QuickAddSpell from "./QuickAddSpell";
 
 interface ISpellBooksProps {
   data: any;
@@ -52,7 +53,7 @@ export default class SpellBooks extends React.Component<
             this.setState({ showNewBookModal: !this.state.showNewBookModal })
           }
         />
-        <Row>
+        <Row className="justify-between">
           <Col sm={1}>
             <SpellbookList
               spellbooks={data.spellbooks}
@@ -64,6 +65,9 @@ export default class SpellBooks extends React.Component<
             <ActiveBookSpells
               activeBookId={activeBook ? activeBook.id : null}
             />
+          </Col>
+          <Col sm={2}>
+            <QuickAddSpell />
           </Col>
         </Row>
       </React.Fragment>
