@@ -28,8 +28,8 @@ export const client = new ApolloClient({
     }
     if (networkError) {
       console.log("Caught network error:", networkError.statusCode);
+      logout();
       if (networkError.statusCode === 401) {
-        logout();
       }
     }
   },
