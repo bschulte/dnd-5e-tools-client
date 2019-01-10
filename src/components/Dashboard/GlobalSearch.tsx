@@ -1,10 +1,9 @@
 import * as React from "react";
+import { Query } from "react-apollo";
 
-import { Modal, Badge, DropdownSearch, HotKey } from "../core";
-import { ListItem } from "../core/ui/ListItem";
+import { Modal, Badge, DropdownSearch, HotKey, ListItem } from "../core";
 import { showDetailsModal } from "../../graphql/shared";
 import { DASHBOARD_QUERY } from "../../graphql/queries";
-import { Query } from "react-apollo";
 import { IS_MODAL_OPEN } from "../../graphql/localState/localQueries";
 
 interface IGlobalSearchProps {}
@@ -58,7 +57,6 @@ export default class GlobalSearch extends React.Component<
 
   public render() {
     const { showOmnibar } = this.state;
-    console.log("Rendering global search, showOmnibar:", showOmnibar);
 
     return (
       <div>
@@ -77,29 +75,35 @@ export default class GlobalSearch extends React.Component<
               if (loading) return "loading...";
 
               const items = this.generateOmnibarItems(data);
-              <DropdownSearch
-                items={items}
-                onActiveItemSelect={this.handleActiveItemSelect}
-                focusOnMount
-                renderItemRow={(item: any, activeItem: any) => (
-                  <ListItem key={item.key} active={activeItem.key === item.key}>
-                    <span>{item.name}</span>
-                    <Badge
-                      className="float-right"
-                      color={
-                        item.type === "Spell"
-                          ? "teal"
-                          : item.type === "Monster"
-                          ? "purple"
-                          : "pink"
-                      }
+
+              return (
+                <DropdownSearch
+                  items={items}
+                  onActiveItemSelect={this.handleActiveItemSelect}
+                  focusOnMount
+                  renderItemRow={(item: any, activeItem: any) => (
+                    <ListItem
+                      key={item.key}
+                      active={activeItem.key === item.key}
                     >
-                      {item.type}
-                    </Badge>
-                  </ListItem>
-                )}
-                filterKeys={["type", "name"]}
-              />;
+                      <span>{item.name}</span>
+                      <Badge
+                        className="float-right"
+                        color={
+                          item.type === "Spell"
+                            ? "teal"
+                            : item.type === "Monster"
+                            ? "purple"
+                            : "pink"
+                        }
+                      >
+                        {item.type}
+                      </Badge>
+                    </ListItem>
+                  )}
+                  filterKeys={["type", "name"]}
+                />
+              );
             }}
           </Query>
         </Modal>
