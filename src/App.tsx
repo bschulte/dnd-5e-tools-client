@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Router, Route, Switch } from "react-router-dom";
+import { Router, Route, Switch, Redirect } from "react-router-dom";
 import { ApolloProvider, Query } from "react-apollo";
 import { history } from "./history";
 
@@ -55,6 +55,7 @@ class App extends Component<any, any> {
                 <Route path="/compendium" component={DashboardPage} />
                 <Route path="/characters" component={CharactersPage} />
                 <Route path="/spellbooks" component={SpellbooksPage} />
+                <Redirect from="/" to="/compendium" />
               </Switch>
             </div>
           </Router>
