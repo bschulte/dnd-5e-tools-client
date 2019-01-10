@@ -3,7 +3,8 @@ import ApolloClient from "apollo-boost";
 import { logout, getToken } from "../util/auth";
 
 export const client = new ApolloClient({
-  uri: "http://localhost:4000/graphql",
+  // uri: "http://localhost:4000/graphql",
+  uri: "https://dnd-v2.cromox.org/graphql",
 
   request: async operation => {
     const token = getToken();

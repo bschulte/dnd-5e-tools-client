@@ -22,7 +22,8 @@ export default class QuickAddSpell extends React.Component<
     await client.mutate({
       mutation: TOGGLE_SPELL,
       variables: { spellId: spellItem.id },
-      refetchQueries: [{ query: GET_SPELLBOOK }]
+      refetchQueries: [{ query: GET_SPELLBOOK }],
+      awaitRefetchQueries: true
     });
   };
 

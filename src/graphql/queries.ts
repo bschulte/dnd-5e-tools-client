@@ -198,7 +198,7 @@ export const GET_SPELLBOOKS = gql`
 `;
 
 export const GET_SPELLBOOK = gql`
-  query spellbook($bookId: Float!) {
+  query spellbook($bookId: Float) {
     spellbook(bookId: $bookId) {
       id
       name

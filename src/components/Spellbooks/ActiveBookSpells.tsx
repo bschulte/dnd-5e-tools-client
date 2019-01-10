@@ -23,6 +23,9 @@ export default class ActiveBookSpells extends React.Component<
   public render() {
     const { activeBookId } = this.props;
 
+    if (!activeBookId) return null;
+    console.log("active book id:", activeBookId);
+
     return (
       <Query query={GET_SPELLBOOK} variables={{ bookId: activeBookId }}>
         {({ data, loading }) => {
