@@ -15,6 +15,7 @@
 ☐ Add additional font weights (probably just have to change google font link)
 ☐ Refactor core components to be React SFC's instead of class components
 ☐ Add styling to react-select dropdowns
+☐ Change GraphQL endpoint based on environment
 
 # Bugs
 ☐ 401 error is not being caught by Apollo client
