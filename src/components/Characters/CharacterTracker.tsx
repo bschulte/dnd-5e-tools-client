@@ -39,6 +39,8 @@ export default class CharacterTracker extends React.Component<
   public render() {
     const { activeCharId } = this.props;
 
+    if (!activeCharId) return null;
+
     return (
       <Query query={GET_CHARACTER} variables={{ id: activeCharId }}>
         {({ data, loading }) => {
