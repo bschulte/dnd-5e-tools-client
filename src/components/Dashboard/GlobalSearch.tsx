@@ -5,6 +5,7 @@ import { Modal, Badge, DropdownSearch, HotKey, ListItem } from "../core";
 import { showDetailsModal } from "../../graphql/shared";
 import { DASHBOARD_QUERY } from "../../graphql/queries";
 import { IS_MODAL_OPEN } from "../../graphql/localState/localQueries";
+import { isLoggedIn } from "../../util/auth";
 
 interface IGlobalSearchProps {}
 
@@ -63,7 +64,7 @@ export default class GlobalSearch extends React.Component<
         <Query query={IS_MODAL_OPEN}>
           {({ data }) => (
             <React.Fragment>
-              {!data.modalOpen && (
+              {!data.modalOpen && isLoggedIn() && (
                 <HotKey hotkey="s" shift onTrigger={this.toggle} />
               )}
             </React.Fragment>

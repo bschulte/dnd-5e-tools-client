@@ -24,7 +24,6 @@ export default class ActiveBookSpells extends React.Component<
     const { activeBookId } = this.props;
 
     if (!activeBookId) return null;
-    console.log("active book id:", activeBookId);
 
     return (
       <Query query={GET_SPELLBOOK} variables={{ bookId: activeBookId }}>
@@ -43,6 +42,7 @@ export default class ActiveBookSpells extends React.Component<
                     <ListItem
                       key={index}
                       onClick={() => showDetailsModal(spell.id, "Spell")}
+                      className="cursor-pointer"
                     >
                       <span>{spell.name}</span>
                       <Badge color="teal" className="float-right">
